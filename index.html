@@ -6,7 +6,7 @@
   <title>Radek — Content Editor & Webflow Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { max-width: 100%; overflow-x: hidden; }
@@ -225,7 +225,7 @@
 
     /* FOOTER */
     footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); padding: 2.5rem 3.5rem; display: flex; align-items: center; justify-content: space-between; }
-    .footer-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: .12em; color: rgba(255,255,255,.6); }
+    .footer-name { font-family: 'DM Sans', sans-serif; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.5); font-weight: 500; }
     .footer-copy { font-size: .72rem; color: rgba(255,255,255,.45); letter-spacing: .1em; }
     .footer-links { display: flex; gap: 1.5rem; }
     .footer-links a { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
@@ -727,7 +727,7 @@
   <title>Radek — Content Editor & Webflow Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { max-width: 100%; overflow-x: hidden; }
@@ -946,7 +946,7 @@
 
     /* FOOTER */
     footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); padding: 2.5rem 3.5rem; display: flex; align-items: center; justify-content: space-between; }
-    .footer-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: .12em; color: rgba(255,255,255,.6); }
+    .footer-name { font-family: 'DM Sans', sans-serif; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.5); font-weight: 500; }
     .footer-copy { font-size: .72rem; color: rgba(255,255,255,.45); letter-spacing: .1em; }
     .footer-links { display: flex; gap: 1.5rem; }
     .footer-links a { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
@@ -1457,71 +1457,6 @@
       display: flex; flex-direction: column; align-items: center;
     }
 
-    /* ── ABOUT MARQUEE / BIG TEXT SECTION ── */
-    .about-marquee {
-      background: var(--cream);
-      padding: 5rem 4rem 4rem;
-      overflow: hidden;
-    }
-    .am-line {
-      display: flex; align-items: center; justify-content: center;
-      flex-wrap: nowrap; gap: .5rem;
-      line-height: 1; margin-bottom: .15rem;
-    }
-    .am-word {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3.5rem, 8vw, 8rem);
-      color: var(--text-dark);
-      letter-spacing: .01em;
-      white-space: nowrap;
-      line-height: 1;
-    }
-    .am-word.am-light  { color: rgba(15,23,42,.3); }
-    .am-word.am-bold   { font-weight: 900; }
-    .am-word.am-blue   { color: var(--blue); }
-    .am-sep {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3rem, 6vw, 6rem);
-      color: rgba(15,23,42,.18);
-      line-height: 1;
-    }
-    /* image height = 1em of the font = matches cap height */
-    .am-img-inline {
-      display: inline-flex; flex-shrink: 0; align-self: center;
-      overflow: hidden; border-radius: 4px;
-      height: .85em; /* matches font cap height */
-      width:  1.1em;
-      font-size: clamp(3.5rem, 8vw, 8rem); /* inherit font size for em units */
-      transition: transform .5s cubic-bezier(.16,1,.3,1);
-    }
-    .am-img-inline:hover { transform: scale(1.06) rotate(-1deg); }
-    .am-img-inline img  { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .am-img-tall  { width: .7em; }
-    .am-img-wide  { width: 1.4em; }
-    .am-sub {
-      margin-top: 2.5rem; text-align: center;
-      font-size: clamp(1.1rem, 2vw, 1.5rem); line-height: 1.75;
-      color: var(--text-muted); font-weight: 300;
-      max-width: 780px; margin-left: auto; margin-right: auto;
-    }
-    @media(max-width:900px){
-      .about-marquee { padding: 3rem 1.2rem 2.5rem; overflow: hidden; }
-      .am-word  { font-size: clamp(2rem, 9vw, 4rem); }
-      .am-img-inline { font-size: clamp(2rem, 9vw, 4rem); }
-      .am-line  { flex-wrap: wrap; justify-content: center; gap: .4rem .5rem; }
-      .am-sub { font-size: .95rem; padding: 0 .5rem; }
-    }
-    @media(max-width:480px){
-      .about-marquee { padding: 2.5rem 1rem 2rem; }
-      .am-word { font-size: clamp(1.6rem, 10.5vw, 3rem); }
-      .am-img-inline { font-size: clamp(1.6rem, 10.5vw, 3rem); }
-      .am-line { gap: .3rem .4rem; }
-      .am-sub { font-size: .88rem; }
-    }
-    @media(max-width:360px){
-      .am-word { font-size: clamp(1.4rem, 10vw, 2.5rem); }
-      .am-img-inline { font-size: clamp(1.4rem, 10vw, 2.5rem); }
-    }
 
     .contact-canvas {
       position: absolute;
@@ -1569,7 +1504,7 @@
   <section class="hero">
     <div class="hero-video-wrap">
       <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&q=80">
-        <source src="https://videos.pexels.com/video-files/3129977/3129977-uhd_2560_1440_30fps.mp4" type="video/mp4">
+        <source src="https://cdn.pixabay.com/video/2018/12/09/19847-306108534_large.mp4" type="video/mp4">
       </video>
     </div>
     <div class="hero-bg-grid"></div>
@@ -1588,45 +1523,11 @@
     <div class="hero-scroll-hint"><div class="scroll-line"></div></div>
   </section>
 
-  <!-- STATS -->
-  <div class="stats-bar">
-    <div class="stat-item reveal"><div class="stat-number" data-target="6">0</div><div class="stat-label">Years of Experience</div></div>
-    <div class="stat-item reveal reveal-delay-1"><div class="stat-number" data-target="15">0</div><div class="stat-label">Projects Delivered</div></div>
-    <div class="stat-item reveal reveal-delay-2"><div class="stat-number" data-target="4">0</div><div class="stat-label">CMS Platforms</div></div>
-  </div>
-
   <!-- TICKER -->
   <div class="ticker-wrap" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
 
-  <!-- ABOUT -->
-  <div id="about" class="about-marquee reveal">
-    <div class="am-line am-line-1">
-      <span class="am-word">Content</span>
-      <span class="am-img-inline"><img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=220&q=85&auto=format&fit=crop" alt=""/></span>
-      <span class="am-word am-light">Management</span>
-    </div>
-    <div class="am-line am-line-2">
-      <span class="am-word am-light">delivering</span>
-      <span class="am-img-inline am-img-tall"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=220&q=85&auto=format&fit=crop" alt=""/></span>
-      <span class="am-word am-bold am-blue">Expert</span>
-      <span class="am-word am-light">results</span>
-    </div>
-    <div class="am-line am-line-3">
-      <span class="am-word">across</span>
-      <span class="am-word am-light">AEM</span>
-      <span class="am-sep">&middot;</span>
-      <span class="am-word am-light">Drupal</span>
-      <span class="am-sep">&middot;</span>
-      <span class="am-img-inline am-img-wide"><img src="https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=220&q=85&auto=format&fit=crop" alt=""/></span>
-      <span class="am-word am-light">Webflow</span>
-    </div>
-    <div class="am-sub reveal-delay-1">
-      6+ years streamlining publishing workflows and launching polished digital experiences — with structure, precision, and attention to detail.
-    </div>
-  </div>
-
   <!-- PROFILE / ABOUT WITH PHOTO -->
-  <section class="profile-section">
+  <section id="about" class="profile-section">
     <div class="profile-inner">
       <div class="profile-text reveal-left">
         <p class="profile-label">About Me</p>
@@ -1646,11 +1547,11 @@
             <div class="profile-stat-label">Years experience</div>
           </div>
           <div>
-            <div class="profile-stat-num">40+</div>
+            <div class="profile-stat-num">15+</div>
             <div class="profile-stat-label">Projects delivered</div>
           </div>
           <div>
-            <div class="profile-stat-num">12</div>
+            <div class="profile-stat-num">4</div>
             <div class="profile-stat-label">CMS platforms</div>
           </div>
         </div>
@@ -1936,13 +1837,13 @@
     <canvas id="contactCanvas" class="contact-canvas" aria-hidden="true"></canvas>
     <p class="section-label reveal">Get In Touch</p>
     <h2 class="contact-heading reveal reveal-delay-1">Let&rsquo;s work<br><span>together</span></h2>
-    <a href="mailto:hello@rucinski.tech" class="contact-email reveal reveal-delay-2">hello@rucinski.tech <svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a href="mailto:radek@rucinski.dev" class="contact-email reveal reveal-delay-2">radek@rucinski.dev <svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </section>
 
   <footer>
-    <span class="footer-name">Radek Ruciński</span>
+    <span class="footer-name">rucinski.dev</span>
     <span class="footer-copy">&copy; 2026 &mdash; All rights reserved</span>
-    <div class="footer-links"><a href="mailto:hello@rucinski.tech">Email</a><a href="https://www.linkedin.com/in/radoslaw-rucinski/" target="_blank" rel="noopener">LinkedIn</a><a href="#">GitHub</a></div>
+    <div class="footer-links"><a href="mailto:radek@rucinski.dev">Email</a><a href="https://www.linkedin.com/in/radoslaw-rucinski/" target="_blank" rel="noopener">LinkedIn</a><a href="https://drive.google.com/file/d/1K8OpTFRPJ0bZEzSdCCOZv67HcMkrJyRS/view" target="_blank" rel="noopener">CV</a></div>
   </footer>
 
   <script>
@@ -1955,7 +1856,7 @@
       cursor.style.left=mx+'px'; cursor.style.top=my+'px';
     });
     (function anim(){
-      rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
+      rx+=(mx-rx)*.25; ry+=(my-ry)*.25;
       ring.style.left=rx+'px'; ring.style.top=ry+'px';
       requestAnimationFrame(anim);
     })();
@@ -1992,13 +1893,14 @@
 
     // COUNTER
     function countUp(el,target,dur=1600){
+      const suffix = el.dataset.suffix || '';
       let s=null;
       (function step(ts){
         if(!s)s=ts;
         const p=Math.min((ts-s)/dur,1);
         const e=1-Math.pow(1-p,3);
-        el.textContent=Math.round(e*target);
-        if(p<1)requestAnimationFrame(step); else el.textContent=target;
+        el.textContent=Math.round(e*target)+suffix;
+        if(p<1)requestAnimationFrame(step); else el.textContent=target+suffix;
       })(performance.now());
     }
 
@@ -2363,9 +2265,8 @@
 
   <script>
   /* ══════════════════════════════════════════════════
-     CONTACT — 3D "CMS" floating text + geometry
-     Three.js — transparent canvas, cream bg shows through
-     Letters orbit + float, glowing edges, soft particles
+     CONTACT — 3D wireframe sphere (same style as profile)
+     Full-background, transparent canvas, cream bg shows
   ══════════════════════════════════════════════════ */
   (function(){
     const container = document.getElementById('contactCanvas');
@@ -2374,217 +2275,113 @@
     const W = () => container.offsetWidth;
     const H = () => container.offsetHeight;
 
-    const renderer = new THREE.WebGLRenderer({
-      canvas: container, antialias: true, alpha: true
-    });
+    const renderer = new THREE.WebGLRenderer({ canvas: container, antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(W(), H());
     renderer.setClearColor(0x000000, 0);
 
     const scene  = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(55, W()/H(), 0.1, 200);
-    camera.position.set(0, 0, 22);
+    const camera = new THREE.PerspectiveCamera(52, W()/H(), 0.1, 200);
+    camera.position.set(0, 0, 6.5);
 
-    /* ── LIGHTS ── */
-    scene.add(new THREE.AmbientLight(0xffffff, 0.4));
-    const pl1 = new THREE.PointLight(0x2563eb, 3.5, 60);
-    pl1.position.set(10, 8, 12);
+    /* LIGHTS */
+    scene.add(new THREE.AmbientLight(0x1a2a5e, 1.0));
+    const pl1 = new THREE.PointLight(0x3b82f6, 5, 30);
+    pl1.position.set(5, 5, 8);
     scene.add(pl1);
-    const pl2 = new THREE.PointLight(0x93c5fd, 2, 50);
-    pl2.position.set(-12, -6, 8);
+    const pl2 = new THREE.PointLight(0x60a5fa, 2.5, 20);
+    pl2.position.set(-6, -3, 4);
     scene.add(pl2);
 
-    /* ── SHARED MATERIAL FACTORY ── */
-    const wireMat = (color = 0x2563eb, opacity = 0.22) =>
-      new THREE.MeshBasicMaterial({ color, wireframe: true, transparent: true, opacity });
-    const edgeMat = (color = 0x3b82f6, opacity = 0.55) =>
-      new THREE.LineBasicMaterial({ color, transparent: true, opacity });
-
-    /* ── HELPER: create edge lines from geometry ── */
-    function edges(geo, color, opacity) {
-      return new THREE.LineSegments(new THREE.EdgesGeometry(geo), edgeMat(color, opacity));
-    }
-
-    /* ══ OBJECT 1: Big rotating icosahedron (main hero) ══ */
-    const icoGeo  = new THREE.IcosahedronGeometry(5, 1);
-    const icoMesh = new THREE.Mesh(icoGeo, wireMat(0x2563eb, 0.08));
-    const icoEdge = edges(icoGeo, 0x3b82f6, 0.28);
+    /* MAIN: large wireframe icosahedron sphere */
+    const icoGeo  = new THREE.IcosahedronGeometry(2.3, 2);
+    const icoMesh = new THREE.Mesh(icoGeo, new THREE.MeshBasicMaterial({
+      color: 0x2563eb, wireframe: true, transparent: true, opacity: 0.14
+    }));
+    const icoEdge = new THREE.LineSegments(
+      new THREE.EdgesGeometry(icoGeo),
+      new THREE.LineBasicMaterial({ color: 0x3b82f6, transparent: true, opacity: 0.38 })
+    );
     const icoGroup = new THREE.Group();
     icoGroup.add(icoMesh, icoEdge);
-    icoGroup.position.set(6, -1, -4);
     scene.add(icoGroup);
 
-    /* ══ OBJECT 2: Octahedron orbiting left ══ */
-    const octGeo   = new THREE.OctahedronGeometry(2.2, 0);
-    const octMesh  = new THREE.Mesh(octGeo, wireMat(0x60a5fa, 0.12));
-    const octEdge  = edges(octGeo, 0x60a5fa, 0.5);
-    const octGroup = new THREE.Group();
-    octGroup.add(octMesh, octEdge);
-    octGroup.position.set(-9, 3, -2);
-    scene.add(octGroup);
+    /* OUTER glow sphere */
+    const outerGeo = new THREE.IcosahedronGeometry(2.6, 1);
+    const outerMesh = new THREE.Mesh(outerGeo, new THREE.MeshBasicMaterial({
+      color: 0x3b82f6, wireframe: true, transparent: true, opacity: 0.05
+    }));
+    scene.add(outerMesh);
 
-    /* ══ OBJECT 3: Small tetrahedron top-right ══ */
-    const tetGeo   = new THREE.TetrahedronGeometry(1.6, 0);
-    const tetEdge  = edges(tetGeo, 0x93c5fd, 0.6);
-    const tetGroup = new THREE.Group();
-    tetGroup.add(new THREE.Mesh(tetGeo, wireMat(0x93c5fd, 0.1)), tetEdge);
-    tetGroup.position.set(8, 5, 2);
-    scene.add(tetGroup);
-
-    /* ══ OBJECT 4: Torus (ring) ══ */
-    const torGeo   = new THREE.TorusGeometry(3, 0.12, 16, 80);
-    const torEdge  = new THREE.Mesh(torGeo,
-      new THREE.MeshBasicMaterial({ color: 0x2563eb, transparent: true, opacity: 0.18 }));
-    const torGroup = new THREE.Group();
-    torGroup.add(torEdge);
-    torGroup.position.set(-5, -4, 0);
-    torGroup.rotation.x = Math.PI / 4;
-    scene.add(torGroup);
-
-    /* ══ OBJECT 5: "CMS" built from box-letters ══ */
-    function makeBoxLetter(w, h, d, color=0x2563eb) {
-      const g = new THREE.BoxGeometry(w, h, d);
-      const m = wireMat(color, 0.14);
-      const mesh = new THREE.Mesh(g, m);
-      const eg = edges(g, color, 0.5);
-      const grp = new THREE.Group();
-      grp.add(mesh, eg);
-      return grp;
-    }
-
-    // C-shape: top bar + left bar + bottom bar
-    const cGroup = new THREE.Group();
-    const cTop    = makeBoxLetter(1.8, 0.35, 0.35);   cTop.position.set(0, 1.1, 0);
-    const cLeft   = makeBoxLetter(0.35, 2.2, 0.35);   cLeft.position.set(-0.73, 0, 0);
-    const cBottom = makeBoxLetter(1.8, 0.35, 0.35);   cBottom.position.set(0, -1.1, 0);
-    cGroup.add(cTop, cLeft, cBottom);
-    cGroup.position.set(-4.5, 0.5, 5);
-
-    // M-shape: two verticals + two diagonals (simplified as 3 bars)
-    const mGroup = new THREE.Group();
-    const mL  = makeBoxLetter(0.35, 2.4, 0.35, 0x3b82f6); mL.position.set(-1, 0, 0);
-    const mR  = makeBoxLetter(0.35, 2.4, 0.35, 0x3b82f6); mR.position.set( 1, 0, 0);
-    const mMid = makeBoxLetter(0.35, 1.4, 0.35, 0x3b82f6);
-    mMid.rotation.z = 0.5; mMid.position.set(-0.3, 0.5, 0);
-    const mMid2 = makeBoxLetter(0.35, 1.4, 0.35, 0x3b82f6);
-    mMid2.rotation.z = -0.5; mMid2.position.set(0.3, 0.5, 0);
-    mGroup.add(mL, mR, mMid, mMid2);
-    mGroup.position.set(0, 0.5, 5);
-
-    // S-shape: top bar + middle bar + bottom bar + partial sides
-    const sGroup = new THREE.Group();
-    const sT  = makeBoxLetter(1.8, 0.35, 0.35, 0x60a5fa); sT.position.set(0.15,  1.1, 0);
-    const sMid= makeBoxLetter(1.8, 0.35, 0.35, 0x60a5fa); sMid.position.set(0,  0, 0);
-    const sB  = makeBoxLetter(1.8, 0.35, 0.35, 0x60a5fa); sB.position.set(-0.15,-1.1, 0);
-    const sTL = makeBoxLetter(0.35, 0.85, 0.35, 0x60a5fa); sTL.position.set(-0.73, 0.55, 0);
-    const sBR = makeBoxLetter(0.35, 0.85, 0.35, 0x60a5fa); sBR.position.set( 0.73,-0.55, 0);
-    sGroup.add(sT, sMid, sB, sTL, sBR);
-    sGroup.position.set(4.8, 0.5, 5);
-
-    const cmsGroup = new THREE.Group();
-    cmsGroup.add(cGroup, mGroup, sGroup);
-    cmsGroup.position.set(-2, -2, -2);
-    scene.add(cmsGroup);
-
-    /* ══ PARTICLES ══ */
-    const pCount = 180;
+    /* PARTICLES */
+    const pCount = 220;
     const pPos   = new Float32Array(pCount * 3);
     const pVel   = [];
-    for(let i = 0; i < pCount; i++) {
-      pPos[i*3]   = (Math.random() - 0.5) * 36;
-      pPos[i*3+1] = (Math.random() - 0.5) * 22;
-      pPos[i*3+2] = (Math.random() - 0.5) * 16;
-      pVel.push({
-        x: (Math.random()-.5)*.015,
-        y: (Math.random()-.5)*.015,
-        z: (Math.random()-.5)*.01
-      });
+    for(let i = 0; i < pCount; i++){
+      const r = 2.0 + Math.random() * 1.4;
+      const theta = Math.random() * Math.PI * 2;
+      const phi   = Math.acos(2 * Math.random() - 1);
+      pPos[i*3]   = r * Math.sin(phi) * Math.cos(theta);
+      pPos[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+      pPos[i*3+2] = r * Math.cos(phi);
+      pVel.push({ x: (Math.random()-.5)*.008, y: (Math.random()-.5)*.008, z: (Math.random()-.5)*.006 });
     }
     const pGeo = new THREE.BufferGeometry();
     pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-    const pMat = new THREE.PointsMaterial({
-      color: 0x3b82f6, size: 0.08,
-      transparent: true, opacity: 0.45, sizeAttenuation: true
-    });
-    scene.add(new THREE.Points(pGeo, pMat));
+    scene.add(new THREE.Points(pGeo, new THREE.PointsMaterial({
+      color: 0x93c5fd, size: 0.04, transparent: true, opacity: 0.6, sizeAttenuation: true
+    })));
 
-    /* ── MOUSE ── */
-    let mx = 0, my = 0, tx = 0, ty = 0;
+    /* MOUSE */
+    let mx=0, my=0, tx=0, ty=0;
     document.addEventListener('mousemove', e => {
       mx = (e.clientX/innerWidth  - .5) * 2;
       my = (e.clientY/innerHeight - .5) * 2;
     });
 
-    /* ── RESIZE ── */
-    const ro = new ResizeObserver(() => {
+    /* RESIZE */
+    new ResizeObserver(() => {
       renderer.setSize(W(), H());
       camera.aspect = W()/H();
       camera.updateProjectionMatrix();
-    });
-    ro.observe(container);
+    }).observe(container);
 
-    /* ── VISIBILITY ── */
+    /* VISIBILITY */
     let vis = false;
     new IntersectionObserver(e => { vis = e[0].isIntersecting; }, {threshold:.05}).observe(container);
 
-    /* ── ANIMATE ── */
     let t = 0;
-    function animate() {
+    function animate(){
       requestAnimationFrame(animate);
       if(!vis) return;
-      t += 0.008;
-
+      t += 0.007;
       tx += (mx - tx) * 0.03;
       ty += (my - ty) * 0.03;
 
-      /* objects rotate + float */
-      icoGroup.rotation.y  = t * 0.35;
-      icoGroup.rotation.x  = t * 0.15;
-      icoGroup.position.y  = -1 + Math.sin(t * 0.6) * 0.8;
+      icoGroup.rotation.y = t * 0.3;
+      icoGroup.rotation.x = t * 0.12 - ty * 0.12;
+      icoGroup.rotation.z = tx * 0.08;
+      outerMesh.rotation.y = -t * 0.15;
+      outerMesh.rotation.x =  t * 0.08;
 
-      octGroup.rotation.y  = -t * 0.5;
-      octGroup.rotation.z  =  t * 0.2;
-      octGroup.position.y  =  3 + Math.sin(t * 0.8 + 1) * 0.6;
+      pl1.position.x = Math.sin(t * 0.6) * 8 + tx * 3;
+      pl1.position.y = Math.cos(t * 0.4) * 6 + ty * 3;
 
-      tetGroup.rotation.x  =  t * 0.7;
-      tetGroup.rotation.y  = -t * 0.4;
-      tetGroup.position.y  =  5 + Math.sin(t * 1.1 + 2) * 0.5;
-
-      torGroup.rotation.z  =  t * 0.3;
-      torGroup.rotation.x  =  Math.PI/4 + Math.sin(t * 0.4) * 0.2;
-      torGroup.position.y  = -4 + Math.sin(t * 0.5 + 0.5) * 0.7;
-
-      /* CMS letters rotate gently */
-      cmsGroup.rotation.y  = Math.sin(t * 0.3) * 0.25 + tx * 0.15;
-      cmsGroup.rotation.x  = Math.sin(t * 0.2) * 0.12 - ty * 0.1;
-      cmsGroup.position.y  = -2 + Math.sin(t * 0.4) * 0.5;
-
-      /* lights orbit */
-      pl1.position.x = Math.sin(t * 0.7) * 14 + tx * 3;
-      pl1.position.y = Math.cos(t * 0.5) * 10 + ty * 3;
-      pl2.position.x = Math.cos(t * 0.6) * -12;
-      pl2.position.y = Math.sin(t * 0.9) *  8;
-
-      /* particles drift */
-      for(let i = 0; i < pCount; i++) {
+      for(let i = 0; i < pCount; i++){
         pPos[i*3]   += pVel[i].x;
         pPos[i*3+1] += pVel[i].y;
         pPos[i*3+2] += pVel[i].z;
-        if(Math.abs(pPos[i*3])   > 18) pVel[i].x *= -1;
-        if(Math.abs(pPos[i*3+1]) > 11) pVel[i].y *= -1;
-        if(Math.abs(pPos[i*3+2]) > 8)  pVel[i].z *= -1;
+        const d = Math.sqrt(pPos[i*3]**2 + pPos[i*3+1]**2 + pPos[i*3+2]**2);
+        if(d > 4 || d < 1.5){ pVel[i].x*=-1; pVel[i].y*=-1; pVel[i].z*=-1; }
       }
       pGeo.attributes.position.needsUpdate = true;
 
-      /* camera sway */
-      camera.position.x = tx * 1.5;
-      camera.position.y = -ty * 1.0;
+      camera.position.x = tx * 0.4;
+      camera.position.y = -ty * 0.3;
       camera.lookAt(scene.position);
-
       renderer.render(scene, camera);
     }
     animate();
   })();
   </script>
-
 </body>
