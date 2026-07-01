@@ -417,8 +417,16 @@
    (requires three.min.js loaded via CDN in HTML)
    ════════════════════════════════════════ */
   /* ══════════════════════════════════════════════════
-     CONTACT — 3D wireframe sphere (same style as profile)
-     Full-background, transparent canvas, cream bg shows
+     CONTACT — 3D wireframe torus
+     Full-bleed canvas, transparent background (cream bg
+     shows through). Sized to read as ~90% of the section's
+     height via the CSS canvas sizing (.contact-canvas) —
+     the torus geometry itself is scaled so it comfortably
+     fills that frame on every breakpoint, from desktop down
+     to mobile, since the camera/FOV stay fixed and only the
+     canvas's CSS box changes size (aspect-ratio handled by
+     the resize observer below, which keeps the torus
+     centered and proportionally large at every width).
   ══════════════════════════════════════════════════ */
   (function(){
     const container = document.getElementById('contactCanvas');
@@ -433,8 +441,8 @@
     renderer.setClearColor(0x000000, 0);
 
     const scene  = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(52, W()/H(), 0.1, 200);
-    camera.position.set(0, 0, 6.5);
+    const camera = new THREE.PerspectiveCamera(50, W()/H(), 0.1, 200);
+    camera.position.set(0, 0, 7);
 
     /* LIGHTS */
     scene.add(new THREE.AmbientLight(0x1a2a5e, 1.0));
@@ -445,44 +453,45 @@
     pl2.position.set(-6, -3, 4);
     scene.add(pl2);
 
-    /* MAIN: large wireframe icosahedron sphere */
-    const icoGeo  = new THREE.IcosahedronGeometry(2.3, 2);
-    const icoMesh = new THREE.Mesh(icoGeo, new THREE.MeshBasicMaterial({
-      color: 0x2563eb, wireframe: true, transparent: true, opacity: 0.14
+    /* MAIN: large wireframe torus — fills ~90% of the canvas frame */
+    const torusGeo = new THREE.TorusGeometry(2.6, 0.95, 32, 120);
+    const torusMesh = new THREE.Mesh(torusGeo, new THREE.MeshBasicMaterial({
+      color: 0x2563eb, wireframe: true, transparent: true, opacity: 0.16
     }));
-    const icoEdge = new THREE.LineSegments(
-      new THREE.EdgesGeometry(icoGeo),
-      new THREE.LineBasicMaterial({ color: 0x3b82f6, transparent: true, opacity: 0.38 })
+    const torusEdge = new THREE.LineSegments(
+      new THREE.EdgesGeometry(torusGeo, 1),
+      new THREE.LineBasicMaterial({ color: 0x3b82f6, transparent: true, opacity: 0.4 })
     );
-    const icoGroup = new THREE.Group();
-    icoGroup.add(icoMesh, icoEdge);
-    scene.add(icoGroup);
+    const torusGroup = new THREE.Group();
+    torusGroup.add(torusMesh, torusEdge);
+    scene.add(torusGroup);
 
-    /* OUTER glow sphere */
-    const outerGeo = new THREE.IcosahedronGeometry(2.6, 1);
+    /* OUTER glow ring — slightly larger, very faint */
+    const outerGeo = new THREE.TorusGeometry(2.9, 1.05, 16, 80);
     const outerMesh = new THREE.Mesh(outerGeo, new THREE.MeshBasicMaterial({
       color: 0x3b82f6, wireframe: true, transparent: true, opacity: 0.05
     }));
     scene.add(outerMesh);
 
-    /* PARTICLES */
+    /* PARTICLES — distributed around the torus's toroidal volume */
     const pCount = 220;
     const pPos   = new Float32Array(pCount * 3);
     const pVel   = [];
     for(let i = 0; i < pCount; i++){
-      const r = 2.0 + Math.random() * 1.4;
-      const theta = Math.random() * Math.PI * 2;
-      const phi   = Math.acos(2 * Math.random() - 1);
-      pPos[i*3]   = r * Math.sin(phi) * Math.cos(theta);
-      pPos[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
-      pPos[i*3+2] = r * Math.cos(phi);
-      pVel.push({ x: (Math.random()-.5)*.008, y: (Math.random()-.5)*.008, z: (Math.random()-.5)*.006 });
+      const u = Math.random() * Math.PI * 2;       // around the main ring
+      const v = Math.random() * Math.PI * 2;       // around the tube
+      const R = 2.6, r = 0.95 + Math.random() * 0.9; // tube radius with some scatter
+      pPos[i*3]   = (R + r * Math.cos(v)) * Math.cos(u);
+      pPos[i*3+1] = (R + r * Math.cos(v)) * Math.sin(u);
+      pPos[i*3+2] = r * Math.sin(v);
+      pVel.push({ x: (Math.random()-.5)*.008, y: (Math.random()-.5)*.008, z: (Math.random()-.5)*.008 });
     }
     const pGeo = new THREE.BufferGeometry();
     pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-    scene.add(new THREE.Points(pGeo, new THREE.PointsMaterial({
-      color: 0x93c5fd, size: 0.04, transparent: true, opacity: 0.6, sizeAttenuation: true
-    })));
+    const pointsMesh = new THREE.Points(pGeo, new THREE.PointsMaterial({
+      color: 0x93c5fd, size: 0.045, transparent: true, opacity: 0.6, sizeAttenuation: true
+    }));
+    scene.add(pointsMesh);
 
     /* MOUSE */
     let mx=0, my=0, tx=0, ty=0;
@@ -491,12 +500,48 @@
       my = (e.clientY/innerHeight - .5) * 2;
     });
 
-    /* RESIZE */
+    /* RESPONSIVE SCALE — the torus is taller than it is wide once
+       rotated into its resting pose, so on tall/narrow canvas boxes
+       (which is most breakpoints, since the canvas height is capped
+       by the section's available vertical space) it can overflow
+       the camera's view. This recalculates a single uniform scale
+       factor from the canvas's actual pixel dimensions every time
+       it resizes, so the torus is guaranteed to fit — proportions
+       are never altered, only the overall scale and, implicitly,
+       its position (which stays centered via the group's own
+       origin). Baseline scale of 1 corresponds to a canvas roughly
+       900px tall; it shrinks below that and grows (capped) above it. */
+    function applyResponsiveScale() {
+      const w = W(), h = H();
+      if (!w || !h) return;
+      // Reference height the geometry was authored against.
+      const refH = 900;
+      // Also respect width so very narrow phones don't overflow horizontally.
+      const refW = 1100;
+      const scaleFromHeight = h / refH;
+      const scaleFromWidth  = w / refW;
+      // Use the more restrictive (smaller) of the two, clamped to a
+      // sane range so the shape never vanishes or balloons.
+      const s = Math.min(scaleFromHeight, scaleFromWidth, 1.15);
+      const finalScale = Math.max(0.42, Math.min(s, 1.15));
+      torusGroup.scale.setScalar(finalScale);
+      outerMesh.scale.setScalar(finalScale);
+      pointsMesh.scale.setScalar(finalScale);
+    }
+
+    /* RESIZE — keeps the torus centered and correctly proportioned
+       as the canvas box resizes at every breakpoint (desktop, iPad/
+       tablet, mobile); aspect ratio always recalculated from the
+       canvas's actual CSS-driven size, and the responsive scale
+       above ensures it's never clipped top/bottom regardless of
+       how tall or short the available section height ends up being. */
     new ResizeObserver(() => {
       renderer.setSize(W(), H());
       camera.aspect = W()/H();
       camera.updateProjectionMatrix();
+      applyResponsiveScale();
     }).observe(container);
+    applyResponsiveScale(); // initial sizing on load
 
     /* VISIBILITY */
     let vis = false;
@@ -506,15 +551,14 @@
     function animate(){
       requestAnimationFrame(animate);
       if(!vis) return;
-      t += 0.007;
+      t += 0.006;
       tx += (mx - tx) * 0.03;
       ty += (my - ty) * 0.03;
 
-      icoGroup.rotation.y = t * 0.3;
-      icoGroup.rotation.x = t * 0.12 - ty * 0.12;
-      icoGroup.rotation.z = tx * 0.08;
-      outerMesh.rotation.y = -t * 0.15;
-      outerMesh.rotation.x =  t * 0.08;
+      torusGroup.rotation.x = 0.5 + t * 0.18 - ty * 0.15;
+      torusGroup.rotation.y = t * 0.26 + tx * 0.15;
+      outerMesh.rotation.x = torusGroup.rotation.x * 0.7;
+      outerMesh.rotation.y = -t * 0.12;
 
       pl1.position.x = Math.sin(t * 0.6) * 8 + tx * 3;
       pl1.position.y = Math.cos(t * 0.4) * 6 + ty * 3;
@@ -524,7 +568,7 @@
         pPos[i*3+1] += pVel[i].y;
         pPos[i*3+2] += pVel[i].z;
         const d = Math.sqrt(pPos[i*3]**2 + pPos[i*3+1]**2 + pPos[i*3+2]**2);
-        if(d > 4 || d < 1.5){ pVel[i].x*=-1; pVel[i].y*=-1; pVel[i].z*=-1; }
+        if(d > 4.2 || d < 1.2){ pVel[i].x*=-1; pVel[i].y*=-1; pVel[i].z*=-1; }
       }
       pGeo.attributes.position.needsUpdate = true;
 
