@@ -45,17 +45,32 @@
     .mobile-menu {
       position: fixed; inset: 0; z-index: 199;
       background: var(--navy);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: flex-start;
+      padding-top: max(4.5rem, 10dvh);
+      padding-bottom: 2rem;
       pointer-events: none; opacity: 0;
-      overflow: hidden;
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: 100dvh;
+      -webkit-overflow-scrolling: touch;
       transition: opacity .45s cubic-bezier(.16,1,.3,1);
     }
     .mobile-menu.open { opacity: 1; pointer-events: all; }
-    .mobile-menu ul { list-style: none; text-align: center; padding: 0; }
-    .mobile-menu ul li { overflow: hidden; margin-bottom: 0.2rem; }
+    .mobile-menu ul {
+      list-style: none; text-align: center; padding: 0;
+      width: 100%;
+      flex-shrink: 0;
+    }
+    .mobile-menu ul li { overflow: hidden; margin-bottom: 0; }
     .mobile-menu ul li a {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3.5rem, 14vw, 6rem);
+      /* Key: constrain by BOTH vw and dvh so landscape can't blow up.
+         With 4 items + padding, each item gets roughly 18dvh budget.
+         We cap at that so all 4 always fit even without scrolling. */
+      font-size: clamp(1.6rem, min(9vw, 18dvh), 5rem);
+      line-height: 1.1;
+      padding: .2em 0;
       letter-spacing: .04em;
       color: rgba(255,255,255,.75);
       text-decoration: none;
@@ -76,6 +91,46 @@
       font-family: 'Bebas Neue', sans-serif; font-size: 35vw;
       color: rgba(255,255,255,.02); white-space: nowrap; pointer-events: none;
       letter-spacing: -.02em; line-height: 1;
+    }
+
+    /* ── LANDSCAPE PHONES (e.g. iPhone SE/14 landscape: ~390–430px tall) ──
+       Very short viewport: reduce font-size using dvh so all 4 links fit.
+       Budget: (100dvh - 3.5rem top - 0.5rem bottom) / 4 items ≈ 21dvh each. */
+    @media (max-height: 500px) {
+      .mobile-menu {
+        padding-top: 3.5rem;
+        padding-bottom: 0.5rem;
+        justify-content: center;
+      }
+      .mobile-menu ul li a {
+        font-size: clamp(1.4rem, min(7vw, 13dvh), 3rem);
+        line-height: 1;
+        padding: .06em 0;
+      }
+    }
+
+    /* ── LANDSCAPE SMALL TABLETS (e.g. iPad mini landscape: ~744px wide, ~500–600px tall) */
+    @media (max-height: 700px) and (min-width: 600px) {
+      .mobile-menu {
+        padding-top: 4rem;
+        padding-bottom: 1rem;
+        justify-content: center;
+      }
+      .mobile-menu ul li a {
+        font-size: clamp(1.8rem, min(8vw, 15dvh), 4.5rem);
+        line-height: 1.05;
+        padding: .12em 0;
+      }
+    }
+
+    /* ── LARGE TABLETS PORTRAIT (e.g. iPad 12.9" portrait: ~1024px tall)
+       Generous height available — keep comfortable sizing but cap so
+       links don't become overwhelmingly large */
+    @media (min-height: 900px) and (max-width: 1100px) {
+      .mobile-menu ul li a {
+        font-size: clamp(3rem, min(10vw, 10dvh), 5.5rem);
+        padding: .35em 0;
+      }
     }
 
 

@@ -100,13 +100,14 @@
       burger.setAttribute('aria-expanded', open);
 
       if(open) {
-        // iOS-safe scroll lock: freeze body at current position
+        // iOS-safe scroll lock: position:fixed alone prevents page scroll.
+        // Do NOT set overflow:hidden on body — that also blocks scrolling
+        // inside the fixed menu overlay on iOS Safari.
         scrollYBeforeMenu = window.scrollY;
         document.body.style.position   = 'fixed';
         document.body.style.top        = `-${scrollYBeforeMenu}px`;
         document.body.style.left       = '0';
         document.body.style.right      = '0';
-        document.body.style.overflow   = 'hidden';
         // keep nav visible while menu open
         nav.classList.remove('hidden');
       } else {
@@ -115,7 +116,6 @@
         document.body.style.top        = '';
         document.body.style.left       = '';
         document.body.style.right      = '';
-        document.body.style.overflow   = '';
         window.scrollTo(0, scrollYBeforeMenu);
       }
     }
