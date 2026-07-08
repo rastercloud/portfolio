@@ -517,7 +517,7 @@ nav.hidden {
 
 .hero-sub {
     font-size: .8rem;
-    color: rgba(255, 255, 255, .3);
+    color: rgba(255, 255, 255, .6);
     letter-spacing: .2em;
     text-transform: uppercase;
     margin-top: 2rem;
@@ -2178,6 +2178,7 @@ footer {
         margin-bottom: 2.8rem;
         font-size: .7rem;
         line-height: 1.7;
+        max-width: 80%;
     }
 
     .hero-scroll-hint {
@@ -2404,11 +2405,6 @@ footer {
         flex-wrap: wrap;
     }
 
-    .cms-expert-label {
-        font-size: 1.15rem;
-        top: -1rem;
-    }
-
     .badge-orbit {
         width: 156px;
         height: 156px;
@@ -2580,7 +2576,7 @@ footer {
 /* Mobile Portrait Safeties */
 @media (max-width: 767px) and (orientation: portrait) {
     .mobile-menu {
-        padding-top: 5rem;
+        padding-top: 1rem;
         padding-bottom: 1.25rem;
     }
 
@@ -2603,7 +2599,7 @@ footer {
     }
 
     .mobile-menu ul li a {
-        font-size: 2rem !important;
+        font-size: 2.8rem !important;
         line-height: 1.1 !important;
         padding: 0.1rem 0 !important;
     }
