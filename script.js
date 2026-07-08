@@ -92,12 +92,9 @@ const burger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 let scrollYBeforeMenu = 0;
 
-// Funkcja zapobiegająca przewijaniu dotykiem na telefonach
+// Całkowite fizyczne zablokowanie eventów dotykowych dla tła i menu
 function preventTouchMove(e) {
-  // Pozwalamy na dotyk wewnątrz menu, ale blokujemy jeśli użytkownik próbuje ciągnąć tło
-  if (mobileMenu && !mobileMenu.contains(e.target)) {
-    e.preventDefault();
-  }
+  e.preventDefault();
 }
 
 function toggleMenu(force) {
@@ -111,28 +108,29 @@ function toggleMenu(force) {
   if (open) {
     scrollYBeforeMenu = window.scrollY;
     
-    // Dodanie klasy blokującej na html i body
+    // Blokujemy widok poprzez dodanie klasy na HTML i BODY
     document.documentElement.classList.add('menu-open');
     document.body.classList.add('menu-open');
     
-    // iOS Safari & Chrome Mobile: Dodatkowa blokada pozycji i wymuszenie top
-    document.body.style.top = `-${scrollYBeforeMenu}px`;
-    
-    // Blokujemy ruchy dotykowe na całej stronie, które mogłyby chować paski przeglądarki
+    // Blokujemy jakąkolwiek próbę przesunięcia palcem (touchmove) na poziomie okna
     document.addEventListener('touchmove', preventTouchMove, { passive: false });
+    if (mobileMenu) {
+      mobileMenu.addEventListener('touchmove', preventTouchMove, { passive: false });
+    }
     
-    // Pokazujemy nawigację, by nie skakała w trakcie otwarcia
     if (nav) nav.classList.remove('hidden');
   } else {
-    // Przywrócenie pierwotnego stanu i usunięcie klas
+    // Odblokowujemy stronę
     document.documentElement.classList.remove('menu-open');
     document.body.classList.remove('menu-open');
     
-    document.body.style.top = '';
-    window.scrollTo(0, scrollYBeforeMenu);
-    
-    // Usuwamy nasłuchiwanie blokady dotyku
+    // Usuwamy blokady dotykowe
     document.removeEventListener('touchmove', preventTouchMove);
+    if (mobileMenu) {
+      mobileMenu.removeEventListener('touchmove', preventTouchMove);
+    }
+    
+    window.scrollTo(0, scrollYBeforeMenu);
   }
 }
 
