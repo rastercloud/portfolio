@@ -87,89 +87,63 @@ function doParallax() {
 window.addEventListener('scroll', doParallax, { passive: true });
 doParallax();
 
-// HAMBURGER
+// HAMBURGER & MOBILE MENU SCROLL LOCK
 const burger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 let scrollYBeforeMenu = 0;
 
-// function toggleMenu(force) {
-//   const open = force !== undefined ? force : !menuOpen;
-//   menuOpen = open;
-//   burger.classList.toggle('open', open);
-//   mobileMenu.classList.toggle('open', open);
-//   burger.setAttribute('aria-expanded', open);
+// Funkcja zapobiegająca przewijaniu dotykiem na telefonach
+function preventTouchMove(e) {
+  // Pozwalamy na dotyk wewnątrz menu, ale blokujemy jeśli użytkownik próbuje ciągnąć tło
+  if (mobileMenu && !mobileMenu.contains(e.target)) {
+    e.preventDefault();
+  }
+}
 
-//   if (open) {
-//     // iOS-safe scroll lock: position:fixed alone prevents page scroll.
-//     scrollYBeforeMenu = window.scrollY;
-//     document.body.style.position = 'fixed';
-//     document.body.style.top = `-${scrollYBeforeMenu}px`;
-//     document.body.style.left = '0';
-//     document.body.style.right = '0';
-//     // keep nav visible while menu open
-//     nav.classList.remove('hidden');
-//   } else {
-//     // restore scroll position
-//     document.body.style.position = '';
-//     document.body.style.top = '';
-//     document.body.style.left = '';
-//     document.body.style.right = '';
-//     window.scrollTo(0, scrollYBeforeMenu);
-//   }
-// }
-// burger.addEventListener('click', () => toggleMenu());
-// document.querySelectorAll('.menu-link').forEach(a => {
-//   a.addEventListener('click', () => toggleMenu(false));
-// });
-// document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleMenu(false); });
+function toggleMenu(force) {
+  const open = force !== undefined ? force : !menuOpen;
+  menuOpen = open;
+  
+  if (burger) burger.classList.toggle('open', open);
+  if (mobileMenu) mobileMenu.classList.toggle('open', open);
+  if (burger) burger.setAttribute('aria-expanded', open);
 
- // HAMBURGER & MOBILE MENU SCROLL LOCK
-    const burger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    let scrollYBeforeMenu = 0;
+  if (open) {
+    scrollYBeforeMenu = window.scrollY;
+    
+    // Dodanie klasy blokującej na html i body
+    document.documentElement.classList.add('menu-open');
+    document.body.classList.add('menu-open');
+    
+    // iOS Safari & Chrome Mobile: Dodatkowa blokada pozycji i wymuszenie top
+    document.body.style.top = `-${scrollYBeforeMenu}px`;
+    
+    // Blokujemy ruchy dotykowe na całej stronie, które mogłyby chować paski przeglądarki
+    document.addEventListener('touchmove', preventTouchMove, { passive: false });
+    
+    // Pokazujemy nawigację, by nie skakała w trakcie otwarcia
+    if (nav) nav.classList.remove('hidden');
+  } else {
+    // Przywrócenie pierwotnego stanu i usunięcie klas
+    document.documentElement.classList.remove('menu-open');
+    document.body.classList.remove('menu-open');
+    
+    document.body.style.top = '';
+    window.scrollTo(0, scrollYBeforeMenu);
+    
+    // Usuwamy nasłuchiwanie blokady dotyku
+    document.removeEventListener('touchmove', preventTouchMove);
+  }
+}
 
-    // Funkcja zapobiegająca przewijaniu dotykiem na telefonach
-    function preventTouchMove(e) {
-      // Pozwalamy na dotyk w menu, ale blokujemy jeśli użytkownik próbuje ciągnąć tło
-      if (!mobileMenu.contains(e.target)) {
-        e.preventDefault();
-      }
-    }
+if (burger) {
+  burger.addEventListener('click', () => toggleMenu());
+}
 
-    function toggleMenu(force) {
-      const open = force !== undefined ? force : !menuOpen;
-      menuOpen = open;
-      burger.classList.toggle('open', open);
-      mobileMenu.classList.toggle('open', open);
-      burger.setAttribute('aria-expanded', open);
-
-      if (open) {
-        scrollYBeforeMenu = window.scrollY;
-        
-        // Dodanie klasy blokującej na html i body
-        document.documentElement.classList.add('menu-open');
-        document.body.classList.add('menu-open');
-        
-        // iOS Safari & Chrome Mobile: Dodatkowa blokada pozycji i wymuszenie top
-        document.body.style.top = `-${scrollYBeforeMenu}px`;
-        
-        // Blokujemy ruchy dotykowe na całej stronie
-        document.addEventListener('touchmove', preventTouchMove, { passive: false });
-        
-        // Pokazujemy nawigację, by nie skakała w trakcie otwarcia
-        nav.classList.remove('hidden');
-      } else {
-        // Przywrócenie pierwotnego stanu i usunięcie klas
-        document.documentElement.classList.remove('menu-open');
-        document.body.classList.remove('menu-open');
-        
-        document.body.style.top = '';
-        window.scrollTo(0, scrollYBeforeMenu);
-        
-        // Usuwamy nasłuchiwanie blokady dotyku
-        document.removeEventListener('touchmove', preventTouchMove);
-      }
-    }
+document.querySelectorAll('.menu-link').forEach(a => {
+  a.addEventListener('click', () => toggleMenu(false));
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleMenu(false); });
 
 // SMOOTH SCROLL
 document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -241,14 +215,17 @@ let vActive = 0;
 let vAuto;
 
 // build progress pips
-vSlides.forEach((_, i) => {
-  const pip = document.createElement('div');
-  pip.className = 'vslider-pip' + (i === 0 ? ' active' : '');
-  pip.addEventListener('click', () => goToSlide(i));
-  vPipsWrap.appendChild(pip);
-});
+if (vSlides.length > 0 && vPipsWrap) {
+  vSlides.forEach((_, i) => {
+    const pip = document.createElement('div');
+    pip.className = 'vslider-pip' + (i === 0 ? ' active' : '');
+    pip.addEventListener('click', () => goToSlide(i));
+    vPipsWrap.appendChild(pip);
+  });
+}
 
 function goToSlide(idx) {
+  if (!vItems.length || !vSlides.length || !vPipsWrap) return;
   vItems[vActive].classList.remove('active');
   vSlides[vActive].classList.remove('active');
   vPipsWrap.children[vActive].classList.remove('active');
@@ -261,25 +238,33 @@ function goToSlide(idx) {
   vTrack.style.transform = `translateY(-${vActive * slideH}px)`;
 }
 
-vItems.forEach((item, i) => {
-  item.addEventListener('click', () => {
-    clearInterval(vAuto);
-    goToSlide(i);
-    startAuto();
+if (vItems.length > 0) {
+  vItems.forEach((item, i) => {
+    item.addEventListener('click', () => {
+      clearInterval(vAuto);
+      goToSlide(i);
+      startAuto();
+    });
   });
-});
+}
 
 function startAuto() {
+  if (!vSlides.length) return;
   vAuto = setInterval(() => {
     goToSlide((vActive + 1) % vSlides.length);
   }, 4000);
 }
-startAuto();
+
+if (vSlides.length > 0) {
+  startAuto();
+}
 
 // recalc on resize
 window.addEventListener('resize', () => {
-  const slideH = vRight.clientHeight;
-  vTrack.style.transform = `translateY(-${vActive * slideH}px)`;
+  if (vRight && vTrack) {
+    const slideH = vRight.clientHeight;
+    vTrack.style.transform = `translateY(-${vActive * slideH}px)`;
+  }
 });
 
 // ── HOVER PROJECT LIST ──
@@ -290,13 +275,17 @@ let previewX = 0, previewY = 0, targetX = 0, targetY = 0;
 let animFrame;
 
 function lerpPreview() {
+  if (!projPreview) return;
   previewX += (targetX - previewX) * 0.1;
   previewY += (targetY - previewY) * 0.1;
   projPreview.style.left = previewX + 'px';
   projPreview.style.top = previewY + 'px';
   animFrame = requestAnimationFrame(lerpPreview);
 }
-lerpPreview();
+
+if (projPreview) {
+  lerpPreview();
+}
 
 document.addEventListener('mousemove', e => {
   targetX = e.clientX + 30;
@@ -306,17 +295,20 @@ document.addEventListener('mousemove', e => {
 projItems.forEach(item => {
   const imgSrc = item.dataset.img;
   item.addEventListener('mouseenter', () => {
-    projPreviewImg.src = imgSrc;
-    projPreview.classList.add('visible');
+    if (projPreviewImg && projPreview) {
+      projPreviewImg.src = imgSrc;
+      projPreview.classList.add('visible');
+    }
   });
   item.addEventListener('mouseleave', () => {
-    projPreview.classList.remove('visible');
+    if (projPreview) {
+      projPreview.classList.remove('visible');
+    }
   });
 });
 
 /* ════════════════════════════════════════
    PROFILE SECTION — Three.js wireframe sphere
-   (requires three.min.js loaded via CDN in HTML)
    ════════════════════════════════════════ */
 (function() {
   const container = document.getElementById('profileCanvas');
@@ -465,7 +457,6 @@ projItems.forEach(item => {
 
 /* ════════════════════════════════════════
    CONTACT SECTION — Three.js wireframe torus + particles
-   (requires three.min.js loaded via CDN in HTML)
    ════════════════════════════════════════ */
 (function() {
   const container = document.getElementById('contactCanvas');
@@ -492,7 +483,7 @@ projItems.forEach(item => {
   pl2.position.set(-6, -3, 4);
   scene.add(pl2);
 
-  /* MAIN: large wireframe torus — fills ~90% of the canvas frame */
+  /* MAIN: large wireframe torus */
   const torusGeo = new THREE.TorusGeometry(2.6, 0.95, 32, 120);
   const torusMesh = new THREE.Mesh(torusGeo, new THREE.MeshBasicMaterial({
     color: 0x2563eb, wireframe: true, transparent: true, opacity: 0.16
@@ -505,21 +496,21 @@ projItems.forEach(item => {
   torusGroup.add(torusMesh, torusEdge);
   scene.add(torusGroup);
 
-  /* OUTER glow ring — slightly larger, very faint */
+  /* OUTER glow ring */
   const outerGeo = new THREE.TorusGeometry(2.9, 1.05, 16, 80);
   const outerMesh = new THREE.Mesh(outerGeo, new THREE.MeshBasicMaterial({
     color: 0x3b82f6, wireframe: true, transparent: true, opacity: 0.05
   }));
   scene.add(outerMesh);
 
-  /* PARTICLES — distributed around the torus's toroidal volume */
+  /* PARTICLES */
   const pCount = 220;
   const pPos = new Float32Array(pCount * 3);
   const pVel = [];
   for (let i = 0; i < pCount; i++) {
-    const u = Math.random() * Math.PI * 2;       // around the main ring
-    const v = Math.random() * Math.PI * 2;       // around the tube
-    const R = 2.6, r = 0.95 + Math.random() * 0.9; // tube radius with some scatter
+    const u = Math.random() * Math.PI * 2;       
+    const v = Math.random() * Math.PI * 2;       
+    const R = 2.6, r = 0.95 + Math.random() * 0.9; 
     pPos[i * 3] = (R + r * Math.cos(v)) * Math.cos(u);
     pPos[i * 3 + 1] = (R + r * Math.cos(v)) * Math.sin(u);
     pPos[i * 3 + 2] = r * Math.sin(v);
@@ -554,14 +545,13 @@ projItems.forEach(item => {
     pointsMesh.scale.setScalar(finalScale);
   }
 
-  /* RESIZE */
   new ResizeObserver(() => {
     renderer.setSize(W(), H());
     camera.aspect = W() / H();
     camera.updateProjectionMatrix();
     applyResponsiveScale();
   }).observe(container);
-  applyResponsiveScale(); // initial sizing on load
+  applyResponsiveScale(); 
 
   /* VISIBILITY */
   let vis = false;
