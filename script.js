@@ -92,36 +92,84 @@ const burger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 let scrollYBeforeMenu = 0;
 
-function toggleMenu(force) {
-  const open = force !== undefined ? force : !menuOpen;
-  menuOpen = open;
-  burger.classList.toggle('open', open);
-  mobileMenu.classList.toggle('open', open);
-  burger.setAttribute('aria-expanded', open);
+// function toggleMenu(force) {
+//   const open = force !== undefined ? force : !menuOpen;
+//   menuOpen = open;
+//   burger.classList.toggle('open', open);
+//   mobileMenu.classList.toggle('open', open);
+//   burger.setAttribute('aria-expanded', open);
 
-  if (open) {
-    // iOS-safe scroll lock: position:fixed alone prevents page scroll.
-    scrollYBeforeMenu = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollYBeforeMenu}px`;
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-    // keep nav visible while menu open
-    nav.classList.remove('hidden');
-  } else {
-    // restore scroll position
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.left = '';
-    document.body.style.right = '';
-    window.scrollTo(0, scrollYBeforeMenu);
-  }
-}
-burger.addEventListener('click', () => toggleMenu());
-document.querySelectorAll('.menu-link').forEach(a => {
-  a.addEventListener('click', () => toggleMenu(false));
-});
-document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleMenu(false); });
+//   if (open) {
+//     // iOS-safe scroll lock: position:fixed alone prevents page scroll.
+//     scrollYBeforeMenu = window.scrollY;
+//     document.body.style.position = 'fixed';
+//     document.body.style.top = `-${scrollYBeforeMenu}px`;
+//     document.body.style.left = '0';
+//     document.body.style.right = '0';
+//     // keep nav visible while menu open
+//     nav.classList.remove('hidden');
+//   } else {
+//     // restore scroll position
+//     document.body.style.position = '';
+//     document.body.style.top = '';
+//     document.body.style.left = '';
+//     document.body.style.right = '';
+//     window.scrollTo(0, scrollYBeforeMenu);
+//   }
+// }
+// burger.addEventListener('click', () => toggleMenu());
+// document.querySelectorAll('.menu-link').forEach(a => {
+//   a.addEventListener('click', () => toggleMenu(false));
+// });
+// document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleMenu(false); });
+
+ // HAMBURGER & MOBILE MENU SCROLL LOCK
+    const burger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let scrollYBeforeMenu = 0;
+
+    // Funkcja zapobiegająca przewijaniu dotykiem na telefonach
+    function preventTouchMove(e) {
+      // Pozwalamy na dotyk w menu, ale blokujemy jeśli użytkownik próbuje ciągnąć tło
+      if (!mobileMenu.contains(e.target)) {
+        e.preventDefault();
+      }
+    }
+
+    function toggleMenu(force) {
+      const open = force !== undefined ? force : !menuOpen;
+      menuOpen = open;
+      burger.classList.toggle('open', open);
+      mobileMenu.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open);
+
+      if (open) {
+        scrollYBeforeMenu = window.scrollY;
+        
+        // Dodanie klasy blokującej na html i body
+        document.documentElement.classList.add('menu-open');
+        document.body.classList.add('menu-open');
+        
+        // iOS Safari & Chrome Mobile: Dodatkowa blokada pozycji i wymuszenie top
+        document.body.style.top = `-${scrollYBeforeMenu}px`;
+        
+        // Blokujemy ruchy dotykowe na całej stronie
+        document.addEventListener('touchmove', preventTouchMove, { passive: false });
+        
+        // Pokazujemy nawigację, by nie skakała w trakcie otwarcia
+        nav.classList.remove('hidden');
+      } else {
+        // Przywrócenie pierwotnego stanu i usunięcie klas
+        document.documentElement.classList.remove('menu-open');
+        document.body.classList.remove('menu-open');
+        
+        document.body.style.top = '';
+        window.scrollTo(0, scrollYBeforeMenu);
+        
+        // Usuwamy nasłuchiwanie blokady dotyku
+        document.removeEventListener('touchmove', preventTouchMove);
+      }
+    }
 
 // SMOOTH SCROLL
 document.querySelectorAll('a[href^="#"]').forEach(a => {

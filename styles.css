@@ -35,9 +35,14 @@ body {
 }
 
 /* Blokada przewijania tła na telefonie przy otwartym menu */
+/* Blokada przewijania tła na urządzeniach mobilnych przy otwartym menu */
+html.menu-open,
 body.menu-open {
-    overflow: hidden !important;
-    touch-action: none !important;
+  overflow: hidden !important;
+  height: 100dvh !important; /* Blokuje wysokość do aktualnego okna viewportu */
+  width: 100% !important;
+  position: fixed !important; /* iOS Safari fallback */
+  touch-action: none !important; /* Blokuje gesty dotykowe przewijania tła */
 }
 
 /* ========================================================================== 2. CUSTOM INTERACTIVE CURSOR (Desktop Only) ========================================================================== */
