@@ -41,7 +41,7 @@
     window.addEventListener('scroll',()=>{ if(!ticking){ requestAnimationFrame(onNavScroll); ticking=true; } },{passive:true});
 
     // TICKER
-    const words=['Content Editing','Webflow Development','CMS Strategy','WordPress','Drupal','Figma','Low-Code','UX Writing','SEO Content','HTML & CSS','JavaScript','Photoshop'];
+    const words=['Adobe Experience Manager','Drupal','WordPress','Content Editing','CMS Strategy','Low-Code','Webflow Development','SEO','HTML','CSS','JavaScript','Photoshop'];
     const track=document.getElementById('ticker');
     const html=words.map(w=>`<span class="ticker-item">${w}<span class="ticker-dot"></span></span>`).join('');
     track.innerHTML=html+html;
