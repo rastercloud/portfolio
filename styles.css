@@ -130,6 +130,8 @@ nav.hidden {
     transform: translateY(-110%);
 }
 
+/* STARE NAV LOGO
+
 .nav-logo {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 1.5rem;
@@ -138,6 +140,38 @@ nav.hidden {
     text-decoration: none;
     z-index: 201;
     position: relative;
+} */
+
+/* NOWE NAV LOGO */
+
+.nav-logo { 
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem; 
+  letter-spacing: .08em; 
+  color: #e6e6e6; 
+  text-decoration: none; 
+  z-index: 201; 
+  position: relative; 
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Pierwsza, stała litera */
+.logo-static {
+  display: inline-block;
+  margin-right: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Część logo, która będzie się zwijać */
+.logo-collapsible {
+  display: inline-block;
+  white-space: nowrap;
+  opacity: 1;
+  max-width: 110px; /* Dokładna szerokość tekstu 'ucinski.dev' */
+  margin-left: 0 !important; /* Usunięcie odstępu między R a u */
+  padding-left: 0 !important;
 }
 
 .nav-links {
