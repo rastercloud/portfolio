@@ -348,14 +348,14 @@ nav.hidden {
 
 /* ========================================================== 4. TEXT REVEAL & SPLITTING FIX (Precludes Mid-Word Breaking) ========================================================== */
 .word {
-    display: inline-block;
-    white-space: nowrap;
+  display: inline-block;
+  white-space: nowrap;
 }
 
-.char-wrap {
-    overflow: hidden;
-    display: inline-block;
-    vertical-align: bottom;
+.char-wrap { 
+  overflow: hidden; 
+  display: inline-block; 
+  vertical-align: bottom; 
 }
 
 .char {
