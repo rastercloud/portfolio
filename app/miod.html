@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jaki miód do Ciebie pasuje?</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Nunito,sans-serif;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#fff3c4,#ffd27a,#ffb84d);
+  overflow:hidden;
+}
+
+.card{
+  width:95%;
+  max-width:700px;
+  background:white;
+  border-radius:24px;
+  padding:30px;
+  box-shadow:0 20px 60px rgba(0,0,0,.15);
+}
+
+h1{font-size:22px;margin-bottom:10px}
+h2{font-size:18px;margin-bottom:20px}
+
+.progress{
+  height:10px;
+  background:#ffe9a8;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:20px;
+}
+.bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#f59e0b,#d97706);
+  transition:.3s;
+}
+
+.option{
+  display:block;
+  width:100%;
+  padding:14px;
+  margin:10px 0;
+  border-radius:14px;
+  border:2px solid #ffe08a;
+  background:#fff7d6;
+  cursor:pointer;
+  font-weight:700;
+  transition:.2s;
+}
+.option:hover{transform:scale(1.02)}
+.option.selected{background:#ffe08a}
+
+.next{
+  width:100%;
+  padding:14px;
+  margin-top:15px;
+  border:none;
+  border-radius:14px;
+  background:#d97706;
+  color:white;
+  font-weight:800;
+  opacity:.4;
+  pointer-events:none;
+}
+
+.next.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.result{
+  text-align:center;
+}
+.big{
+  font-size:60px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="app"></div>
+
+<script>
+const questions = [
+{
+emoji:"👅",
+text:"Jaki smak najbardziej lubisz?",
+options:[
+{emoji:"🌸",text:"Bardzo delikatny",scores:{acacia:3}},
+{emoji:"🌿",text:"Mocny i wyrazisty",scores:{buckwheat:3}},
+{emoji:"🌼",text:"Kwiatowy",scores:{linden:3}},
+{emoji:"🍞",text:"Łagodny i kremowy",scores:{rapeseed:3}}
+]
+},
+{
+emoji:"☕",
+text:"Do czego używasz miodu najczęściej?",
+options:[
+{emoji:"🫖",text:"Herbata",scores:{linden:3}},
+{emoji:"🍞",text:"Kanapki",scores:{rapeseed:3}},
+{emoji:"🍳",text:"Gotowanie",scores:{multiflower:3}},
+{emoji:"💊",text:"Zdrowie",scores:{buckwheat:3}}
+]
+},
+{
+emoji:"🌟",
+text:"Co cenisz najbardziej?",
+options:[
+{emoji:"💛",text:"Delikatność",scores:{acacia:3}},
+{emoji:"🛡️",text:"Zdrowie",scores:{buckwheat:3}},
+{emoji:"🌸",text:"Aromat",scores:{linden:3}},
+{emoji:"🌍",text:"Uniwersalność",scores:{multiflower:3}}
+]
+},
+{
+emoji:"🏃",
+text:"Twój styl życia?",
+options:[
+{emoji:"⚡",text:"Aktywny",scores:{buckwheat:3}},
+{emoji:"🧘",text:"Spokojny",scores:{linden:3}},
+{emoji:"🏡",text:"Domowy",scores:{rapeseed:3}},
+{emoji:"👨‍🍳",text:"Kulinarny",scores:{multiflower:3}}
+]
+},
+{
+emoji:"🌍",
+text:"Skąd powinien pochodzić Twój miód?",
+options:[
+{emoji:"🌲",text:"Las",scores:{acacia:3}},
+{emoji:"🌾",text:"Pole",scores:{buckwheat:3}},
+{emoji:"🌸",text:"Łąka",scores:{multiflower:3}},
+{emoji:"🌳",text:"Lipowe drzewa",scores:{linden:3}}
+]
+}
+];
+
+const results = {
+acacia:{emoji:"🌸",name:"Miód Akacjowy"},
+linden:{emoji:"🌿",name:"Miód Lipowy"},
+buckwheat:{emoji:"🌾",name:"Miód Gryczany"},
+multiflower:{emoji:"🌺",name:"Miód Wielokwiatowy"},
+rapeseed:{emoji:"🌻",name:"Miód Rzepakowy"}
+};
+
+let i=0;
+let selected=null;
+
+let scores={
+acacia:0,
+linden:0,
+buckwheat:0,
+multiflower:0,
+rapeseed:0
+};
+
+const app=document.getElementById("app");
+
+function render(){
+const q=questions[i];
+const progress=(i/questions.length)*100;
+
+app.innerHTML=`
+<h1>🐝 Jaki miód do Ciebie pasuje?</h1>
+
+<div class="progress">
+<div class="bar" style="width:${progress}%"></div>
+</div>
+
+<h2>${q.emoji} ${q.text}</h2>
+
+${q.options.map((o,idx)=>`
+<button class="option" data-i="${idx}">
+${o.emoji} ${o.text}
+</button>
+`).join("")}
+
+<button class="next" id="next">Dalej</button>
+`;
+
+document.querySelectorAll(".option").forEach(btn=>{
+btn.onclick=()=>{
+document.querySelectorAll(".option").forEach(b=>b.classList.remove("selected"));
+btn.classList.add("selected");
+selected=+btn.dataset.i;
+document.getElementById("next").classList.add("active");
+};
+});
+
+document.getElementById("next").onclick=()=>{
+if(selected===null) return;
+
+Object.entries(q.options[selected].scores)
+.forEach(([k,v])=>scores[k]+=v);
+
+i++;
+selected=null;
+
+if(i>=questions.length) return show();
+render();
+};
+}
+
+function show(){
+const winner=Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
+const r=results[winner];
+
+app.innerHTML=`
+<div class="result">
+<div class="big">${r.emoji}</div>
+<h1>${r.name}</h1>
+<p>Twój idealny miód 🍯</p>
+
+<button onclick="location.reload()" class="next active">
+Zagraj jeszcze raz
+</button>
+</div>
+`;
+}
+
+render();
+</script>
+
+</body>
+</html>
