@@ -132,10 +132,10 @@ nav.hidden {
 
 .nav-logo { 
   /* Zmiana czcionki WYŁĄCZNIE dla logo w menu */
-  font-family: 'Plus Jakarta Sans', sans-serif !important; 
+  font-family: 'DM Sans', sans-serif !important; 
   font-weight: 800 !important; 
-  font-size: 1.15rem !important; 
-  letter-spacing: -0.03em !important; 
+  font-size: 1.5rem !important; 
+  letter-spacing: 0.05em !important; 
   color: #fff; 
   text-decoration: none; 
   z-index: 201; 
@@ -145,26 +145,13 @@ nav.hidden {
   overflow: hidden;
 }
 
-/* Styl dla Twojej ikony graficznej R */
-.logo-icon {
-  height: 22px; 
-  width: auto;
-  display: inline-block;
-  flex-shrink: 0;
-  vertical-align: middle;
-  padding-bottom: 3px;
-}
-
-/* Część logo, która będzie się zwijać */
+/* Część, która będzie się zwijać */
 .logo-collapsible {
   display: inline-block;
   white-space: nowrap;
   opacity: 1;
   max-width: 120px; 
   
-  /* Przysunięcie tekstu bliżej ikony R */
-  margin-left: -1px !important; 
-  padding-left: 0 !important;
 }
 
 .nav-links {
@@ -1086,82 +1073,140 @@ section {
     }
 }
 
-/* ========================================================== 9. SKILLS DISPLAY CHIPS ========================================================== */
-.skills-section {
-    background: var(--warm-white);
-    padding: 8rem 3.5rem;
-    text-align: center;
+/* ==========================================================
+   9. SKILLS DISPLAY CHIPS (CLEAN ROW CATEGORIES EDITION)
+   ========================================================== */
+
+/* Zachowujemy strukturę i padding samej sekcji na stronie */
+.skills-section { 
+  background: var(--warm-white); 
+  padding: 8rem 3.5rem; 
+  text-align: center; 
 }
 
-.skills-section .section-label {
-    justify-content: center;
+.skills-section .section-label { 
+  justify-content: center; 
 }
 
-.skills-section .section-label::before {
-    display: none;
+.skills-section .section-label::before { 
+  display: none; 
 }
 
-.skills-title {
-    font-family: 'DM Sans', sans-serif;
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
-    font-weight: 300;
-    margin-bottom: .5rem;
+.skills-title { 
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.4rem); 
+  font-weight: 300; 
+  margin-bottom: .5rem; 
 }
 
-.skills-title strong {
-    font-weight: 500;
+.skills-title strong { 
+  font-weight: 500; 
 }
 
+/* ── ELEMENTY STRUKTURALNE LINII (KATEGORII) ── */
+
+/* Główny kontener grupujący wiersze kategorii */
+.skills-container {
+    max-width: 1000px;
+    margin: 4.5rem auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem; /* Odstęp między całymi wierszami */
+    text-align: center; /* Wyśrodkowanie całej struktury */
+}
+
+/* Pojedynczy wiersz z kategorią */
+.skills-category-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centruje nagłówek oraz siatkę w pionie */
+    gap: 1.5rem;
+}
+
+/* Nazwa kategorii - używa teraz DM Sans, wyśrodkowana z elegancką, krótszą linią */
+.category-name {
+    font-family: 'DM Sans', sans-serif; /* Spójny font, brak "bigosu" czcionek */
+    font-size: .78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    color: var(--text-muted);
+    position: relative;
+    padding-bottom: 1.2rem;
+    width: 100%;
+    text-align: center; /* Wyśrodkowanie tekstu */
+}
+
+/* Zastąpienie pełnego bordera linią na 75% szerokości (odpowiednik hr) */
+.category-name::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 12.5%; /* Centrowanie linii o szerokości 75% ( (100% - 75%) / 2 = 12.5% ) */
+    width: 75%;
+    height: 1px;
+    background: rgba(15, 23, 42, 0.08); /* Subtelna szara linia rozdzielająca */
+}
+
+/* Siatka układająca chipy (teraz wyśrodkowana) */
 .skills-grid {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: center; /* Centrowanie kafelków w rzędzie */
     gap: 1rem;
-    margin-top: 3.5rem;
-    max-width: 820px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
 }
 
+/* ODWRÓCONY, JASNY STYL PREMIUM (Dla maksymalnej widoczności czarnych ikon) */
 .skill-chip {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: .65rem;
-    padding: .75rem 1.5rem;
-    background: var(--navy);
-    border: 1px solid rgba(255, 255, 255, .08);
+    justify-content: center;
+    gap: .8rem;
+    padding: .9rem 1.6rem;
+    background: rgba(250, 250, 248, 0.95); /* Jasne tło, na którym ikony są perfekcyjnie widoczne */
+    border: 1px solid rgba(15, 23, 42, 0.08);
     border-radius: 999px;
-    font-size: .83rem;
+    
+    font-family: 'DM Sans', sans-serif; /* Konsekwentnie używamy DM Sans */
+    font-size: .95rem; 
     font-weight: 500;
-    letter-spacing: .04em;
-    color: rgba(255, 255, 255, .85);
+    letter-spacing: .02em;
+    color: var(--text-dark); /* Ciemny tekst kontrastujący z jasnym chipem */
+    
     cursor: default;
     transition: all .3s ease;
+    line-height: 1 !important; 
+    height: 52px; /* Wysokość idealnie zbalansowana dla ikon 30x30px */
+    box-sizing: border-box;
 }
 
+/* Efekt najechania myszką (Hover) */
 .skill-chip:hover {
     border-color: var(--blue-bright);
-    background: var(--navy-mid);
+    background: #ffffff;
     transform: translateY(-3px);
-    box-shadow: 0 8px 28px rgba(37, 99, 235, .35), 0 0 0 1px rgba(59, 130, 246, .2);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.12), 0 0 0 1px rgba(59, 130, 246, 0.08);
 }
 
+/* KONTENER NA IKONĘ (30x30px) */
 .skill-chip .icon {
-    width: 22px;
-    height: 22px;
-    display: flex;
+    width: 30px !important;
+    height: 30px !important;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
+    flex-shrink: 0;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-.chip-js .icon {
-    background: #323330;
-    border-radius: 3px;
-    font-size: .65rem;
-    font-weight: 800;
-    color: #f0db4f;
-    letter-spacing: 0;
+/* Obrazki SVG (HTML5, CSS3, itp.) są teraz idealnie widoczne na jasnym tle! */
+.skill-chip img.icon {
+    display: block;
+    width: 30px !important;
+    height: 30px !important;
+    object-fit: contain;
 }
 
 /* ========================================================== 10. CINEMATIC VIDEO WAVE STRIP ========================================================== */
@@ -2094,15 +2139,23 @@ footer {
 }
 
 .reveal-delay-1 {
-    transition-delay: .1s;
-}
-
-.reveal-delay-2 {
     transition-delay: .2s;
 }
 
+.reveal-delay-2 {
+    transition-delay: .4s;
+}
+
 .reveal-delay-3 {
-    transition-delay: .3s;
+    transition-delay: .6s;
+}
+
+.reveal-delay-4 {
+    transition-delay: .8s;
+}
+
+.reveal-delay-5 {
+    transition-delay: 1s;
 }
 
 .reveal-clip {
