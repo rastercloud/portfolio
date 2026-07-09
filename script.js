@@ -588,27 +588,23 @@ projItems.forEach(item => {
   animate();
 })();
 
-// ── SMART NAV LOGO COLLAPSE (Anthropic Effect) ──
+// ── SMART NAV LOGO COLLAPSE (Anthropic Effect with Icon) ──
 const logoCollapsible = document.querySelector('.logo-collapsible');
 
 function handleLogoCollapse() {
   if (!logoCollapsible) return;
   
   const scrollY = window.scrollY;
-  const maxScroll = 120; // Dystans (w px), na którym logo ma się całkowicie złożyć
+  const maxScroll = 120; // Dystans zwijania (w px)
   
-  // Obliczamy progres (od 0 do 1)
   const progress = Math.min(scrollY / maxScroll, 1);
   const inverseProgress = 1 - progress;
   
-  // Zamiast nagłego pojawiania się, precyzyjnie kalkulujemy max-width i opacity dla każdej klatki scrolla
-  // 110px to szerokość tekstu 'ucinski.dev'
-  logoCollapsible.style.maxWidth = `${inverseProgress * 110}px`;
+  // 130px to maksymalna szerokość tekstu 'ucinski.dev' w nowej czcionce Space Grotesk
+  logoCollapsible.style.maxWidth = `${inverseProgress * 130}px`;
   logoCollapsible.style.opacity = inverseProgress;
 }
 
-// Wywołujemy na scroll oraz na starcie
 window.addEventListener('scroll', handleLogoCollapse, { passive: true });
 document.addEventListener('DOMContentLoaded', handleLogoCollapse);
-// Dodatkowy wywoływacz na wypadek szybkiego renderowania stylów
 handleLogoCollapse();

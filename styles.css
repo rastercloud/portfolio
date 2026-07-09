@@ -130,25 +130,13 @@ nav.hidden {
     transform: translateY(-110%);
 }
 
-/* STARE NAV LOGO
-
-.nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem;
-    letter-spacing: .12em;
-    color: #fff;
-    text-decoration: none;
-    z-index: 201;
-    position: relative;
-} */
-
-/* NOWE NAV LOGO */
-
 .nav-logo { 
-  font-family: 'DM Sans', sans-serif;
-  font-size: 1rem; 
-  letter-spacing: .08em; 
-  color: #e6e6e6; 
+  /* Zmiana czcionki WYŁĄCZNIE dla logo w menu */
+  font-family: 'Plus Jakarta Sans', sans-serif !important; 
+  font-weight: 800 !important; 
+  font-size: 1.15rem !important; 
+  letter-spacing: -0.03em !important; 
+  color: #fff; 
   text-decoration: none; 
   z-index: 201; 
   position: relative; 
@@ -157,11 +145,14 @@ nav.hidden {
   overflow: hidden;
 }
 
-/* Pierwsza, stała litera */
-.logo-static {
+/* Styl dla Twojej ikony graficznej R */
+.logo-icon {
+  height: 22px; 
+  width: auto;
   display: inline-block;
-  margin-right: 0 !important;
-  padding-right: 0 !important;
+  flex-shrink: 0;
+  vertical-align: middle;
+  padding-bottom: 3px;
 }
 
 /* Część logo, która będzie się zwijać */
@@ -169,8 +160,10 @@ nav.hidden {
   display: inline-block;
   white-space: nowrap;
   opacity: 1;
-  max-width: 110px; /* Dokładna szerokość tekstu 'ucinski.dev' */
-  margin-left: 0 !important; /* Usunięcie odstępu między R a u */
+  max-width: 120px; 
+  
+  /* Przysunięcie tekstu bliżej ikony R */
+  margin-left: -1px !important; 
   padding-left: 0 !important;
 }
 
