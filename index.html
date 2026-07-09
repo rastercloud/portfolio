@@ -6,7 +6,7 @@
   <title>Radek — Digital Content Specialist  Webflow Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -16,8 +16,12 @@
 
   <nav id="mainNav">
     <div class="nav-inner-container">
-      <a class="nav-logo" href="#">R&sup2;</a>
-      <ul class="nav-links">
+      <a class="nav-logo" href="#">r
+  
+  <span class="logo-collapsible">ucinski</span>
+</a>
+
+<ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#portfolio">Work</a></li>
@@ -34,8 +38,8 @@
     <div class="mobile-menu-bg-text">R</div>
     <ul>
       <li><a href="#about" class="menu-link"><span class="num">01</span>About</a></li>
-      <li><a href="#skills" class="menu-link"><span class="num">02</span>Skills</a></li>
       <li><a href="#portfolio" class="menu-link"><span class="num">03</span>Work</a></li>
+      <li><a href="#skills" class="menu-link"><span class="num">02</span>Skills</a></li>
       <li><a href="#contact" class="menu-link"><span class="num">04</span>Contact</a></li>
     </ul>
     <div class="mobile-menu-footer">Crafting Content &middot; Building Bold</div>
@@ -100,21 +104,18 @@
       <div class="profile-photo-wrap reveal-right">
         <div class="profile-3d-canvas" id="profileCanvas"></div>
 
-        <!-- label sits above the 3D shape, bold, no box -->
-        <p class="cms-expert-label">CMS Expert</p>
-
         <!-- orbiting platform icons, overlaid directly on the shape —
              swap these src values for real SVGs whenever ready -->
         <div class="badge-orbit">
           <div class="badge-orbit-spin">
-            <span class="badge-orbit-icon badge-orbit-icon-1" title="AEM">
-              <img src="https://placehold.co/64x64/3a2a1d/ff7618?text=AEM" alt="AEM" loading="lazy"/>
+            <span class="badge-orbit-icon badge-orbit-icon-1" title="Adobe Experience Manger">
+              <img src="images/technologies/aem-icon.svg" alt="Adobe Experience Manger icon" loading="lazy"/>
             </span>
             <span class="badge-orbit-icon badge-orbit-icon-2" title="Drupal">
-              <img src="https://placehold.co/64x64/0678be/ffffff?text=Dr" alt="Drupal" loading="lazy"/>
+              <img src="images/technologies/drupal-head.svg" alt="Drupal icon" loading="lazy"/>
             </span>
             <span class="badge-orbit-icon badge-orbit-icon-3" title="WordPress">
-              <img src="https://placehold.co/64x64/21759b/ffffff?text=WP" alt="WordPress" loading="lazy"/>
+              <img src="images/technologies/wordpress-icon.svg" alt="WordPress icon" loading="lazy"/>
             </span>
           </div>
         </div>
@@ -354,44 +355,90 @@
   </div>
 
   <!-- SKILLS -->
-  <section id="skills" class="skills-section">
-    <p class="section-label reveal">Technologies &amp; Tools</p>
-    <h2 class="skills-title reveal reveal-delay-1">Tools I <strong>actually use</strong></h2>
-    <div class="skills-grid">
-      <div class="skill-chip reveal reveal-delay-1"><span class="icon" style="color:#e34f26">&#x3C;/&#x3E;</span>HTML5</div>
-      <div class="skill-chip reveal reveal-delay-1"><span class="icon" style="color:#264de4">#</span>CSS3</div>
-      <div class="skill-chip chip-js reveal reveal-delay-1"><span class="icon">JS</span>JavaScript</div>
-      <div class="skill-chip reveal reveal-delay-2">
-        <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="#4353ff"><path d="M17.82 6.34a6 6 0 0 0-4.96 2.65l-1.27-2.65H8.5l2.12 4.42L8.5 15.5l-2.12-5.42H3l3.6 9.66h3.1l1.23-3.33.56 1.18a6 6 0 1 0 6.33-11.25z"/></svg></span>Webflow
-      </div>
-      <div class="skill-chip reveal reveal-delay-2"><span class="icon" style="color:#21759b;font-size:.7rem;font-weight:700">WP</span>WordPress</div>
-      <div class="skill-chip reveal reveal-delay-2"><span class="icon"><svg width="18" height="18" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="#0678be" d="M13.7 4.7C12.1 3.1 10.4 1.5 9.9 0 9.4 1.5 7.7 3.1 6.1 4.7 3.8 7 1 9.8 1 14c0 2.4 1 4.7 2.6 6.4C5.2 22 7.4 23 9.9 23c2.5 0 4.7-1 6.3-2.6 1.7-1.7 2.6-4 2.6-6.4 0-4.2-2.8-7-5.1-9.3z"/><path fill="#fff" d="M7.5 15.2c.5-.7 1.2-1.4 2.4-2.7 1.1 1.2 1.8 2 2.4 2.7a2.5 2.5 0 0 1-4.8 0z"/></svg></span>Drupal</div>
-      <div class="skill-chip reveal reveal-delay-3">
-        <span class="icon"><svg width="14" height="18" viewBox="0 0 38 57" fill="none"><rect x="0" y="0" width="19" height="19" rx="9.5" fill="#F24E1E"/><rect x="19" y="0" width="19" height="19" rx="9.5" fill="#FF7262"/><rect x="0" y="19" width="19" height="19" rx="9.5" fill="#A259FF"/><rect x="0" y="38" width="19" height="19" rx="9.5" fill="#0ACF83"/><circle cx="28.5" cy="28.5" r="9.5" fill="#1ABCFE"/></svg></span>Figma
-      </div>
-      <div class="skill-chip reveal reveal-delay-3"><span class="icon" style="background:#001e36;border-radius:3px;padding:1px 4px;font-size:.65rem;font-weight:800;color:#31a8ff;letter-spacing:0">Ps</span>Photoshop</div>
-      <div class="skill-chip reveal reveal-delay-3"><span class="icon" style="color:#0052cc;font-size:.7rem;font-weight:700">JR</span>Jira</div>
-      <div class="skill-chip reveal reveal-delay-3">
-        <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg></span>Google Tools
-      </div>
-      <div class="skill-chip reveal reveal-delay-1"><span class="icon"><svg width="18" height="18" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="aemg" cx="352" cy="352" r="512" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3a2a1d"/><stop offset="1" stop-color="#241405"/></radialGradient></defs><path fill="url(#aemg)" d="M0 0h1024v1024H0z"/><path fill="#ff7618" d="M71 512c0 243.6 197.4 441 441 441s441-197.4 441-441S755.6 71 512 71 71 268.4 71 512zm45-.5c.3-218.7 177.8-395.8 396.5-395.5S908.3 293.8 908 512.5 730.5 908 512 908 115.9 730.4 116 511.6z"/><path fill="#ffe0cb" d="M787 512a96.5 96.5 0 0 0-54.3-86.7 102.4 102.4 0 0 0-134-134 96.4 96.4 0 0 0-173.4 0 102.4 102.4 0 0 0-134 134 96.4 96.4 0 0 0 0 173.4 102.4 102.4 0 0 0 134 134 96.4 96.4 0 0 0 173.4 0 102.4 102.4 0 0 0 134-134A96.5 96.5 0 0 0 787 512z"/></svg></span>Adobe Experience Manager</div>
-      <div class="skill-chip reveal reveal-delay-2"><span class="icon" style="color:#e8442d;font-size:.72rem;font-weight:700">SF</span>Screaming Frog</div>
-      <div class="skill-chip reveal reveal-delay-2"><span class="icon" style="color:#f06a35;font-size:.7rem;font-weight:700">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="#f06a35"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg></span>Asana</div>
-      <div class="skill-chip reveal reveal-delay-3"><span class="icon" style="color:#2d8cff;font-size:.7rem;font-weight:700">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="#2d8cff"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Zoom</div>
-      <div class="skill-chip reveal reveal-delay-1">
-        <span class="icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" fill="#cc785c"/></svg>
-        </span>Claude AI
-      </div>
-      <div class="skill-chip reveal reveal-delay-2">
-        <span class="icon">
-          <svg width="18" height="18" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M37.532 16.87a9.963 9.963 0 0 0-.856-8.184 10.078 10.078 0 0 0-10.855-4.835 9.964 9.964 0 0 0-6.211-2.423 10.079 10.079 0 0 0-9.617 6.977 9.967 9.967 0 0 0-6.663 4.834 10.08 10.08 0 0 0 1.24 11.817 9.965 9.965 0 0 0 .856 8.185 10.079 10.079 0 0 0 10.855 4.835 9.965 9.965 0 0 0 6.211 2.422 10.08 10.08 0 0 0 9.617-6.981 9.967 9.967 0 0 0 6.663-4.834 10.079 10.079 0 0 0-1.24-11.813zM22.498 37.886a7.474 7.474 0 0 1-4.799-1.735c.061-.033.168-.091.237-.134l7.964-4.6a1.294 1.294 0 0 0 .655-1.134V19.054l3.366 1.944a.12.12 0 0 1 .066.092v9.299a7.505 7.505 0 0 1-7.49 7.496zM6.392 31.006a7.471 7.471 0 0 1-.894-5.023c.06.036.162.099.237.141l7.964 4.6a1.297 1.297 0 0 0 1.308 0l9.724-5.614v3.888a.12.12 0 0 1-.048.103l-8.051 4.649a7.504 7.504 0 0 1-10.24-2.744zM4.297 13.62A7.469 7.469 0 0 1 8.2 10.333c0 .068-.004.19-.004.274v9.201a1.294 1.294 0 0 0 .654 1.132l9.723 5.614-3.366 1.944a.12.12 0 0 1-.114.012L7.044 23.86a7.504 7.504 0 0 1-2.747-10.24zm27.658 6.437l-9.724-5.615 3.367-1.943a.121.121 0 0 1 .114-.012l8.048 4.648a7.498 7.498 0 0 1-1.158 13.528v-9.476a1.293 1.293 0 0 0-.647-1.13zm3.35-5.043c-.059-.037-.162-.099-.236-.141l-7.965-4.6a1.298 1.298 0 0 0-1.308 0l-9.723 5.614v-3.888a.12.12 0 0 1 .048-.103l8.05-4.645a7.497 7.497 0 0 1 11.135 7.763zm-21.063 6.929l-3.367-1.944a.12.12 0 0 1-.065-.092v-9.299a7.497 7.497 0 0 1 12.293-5.756 6.94 6.94 0 0 0-.236.134l-7.965 4.6a1.294 1.294 0 0 0-.654 1.132l-.006 11.225zm1.829-3.943l4.33-2.501 4.332 2.498v4.997l-4.331 2.5-4.331-2.5V18z" fill="#10a37f"/></svg>
-        </span>ChatGPT
+<section id="skills" class="skills-section">
+  <p class="section-label reveal">Technologies &amp; Tools</p>
+  <h2 class="skills-title reveal reveal-delay-1">Tools I <strong>actually use</strong></h2>
+  
+  <div class="skills-container">
+    
+    <!-- LINIA 1: Enterprise, Headless & Low-Code CMS -->
+    <div class="skills-category-row reveal reveal-delay-1">
+      <h3 class="category-name">Enterprise, Headless &amp; Low-Code CMS</h3>
+      <div class="skills-grid">
+        <div class="skill-chip">
+          <img class="icon" src="images/technologies/aem-icon.svg" alt="Adobe Experience Manager" />Adobe Experience Manager
+        </div>
+        <div class="skill-chip">
+          <img class="icon" src="images/technologies/drupal-head.svg" alt="Drupal" />Drupal
+        </div>
+        <div class="skill-chip">
+          <img class="icon" src="images/technologies/wordpress-icon.svg" alt="WordPress" />WordPress
+        </div>
+        <div class="skill-chip">
+          <img class="icon" src="images/technologies/webflow-icon.svg" alt="Webflow" />Webflow
+        </div>
       </div>
     </div>
-  </section>
+
+    <!-- LINIA 2: Core Frontend Development -->
+    <div class="skills-category-row reveal reveal-delay-2">
+      <h3 class="category-name">Core Frontend Development</h3>
+      <div class="skills-grid">
+        <div class="skill-chip">
+          <img class="icon" src="images/technologies/html5-icon.svg" alt="HTML5" />HTML5
+        </div>
+        <div class="skill-chip">
+          <img class="icon" src="images/technologies/css-icon.svg" alt="CSS" />CSS
+        </div>
+        <div class="skill-chip">
+          <img class="icon" src="images/technologies/javascript.svg" alt="JavaScript" />JavaScript
+        </div>
+      </div>
+    </div>
+
+    <!-- LINIA 3: Design & Project Ops -->
+    <div class="skills-category-row reveal reveal-delay-3">
+      <h3 class="category-name">Design &amp; Project Ops</h3>
+      <div class="skills-grid">
+        <div class="skill-chip">
+          <img class="icon" src="images/technologies/figma-icon.svg" alt="Figma" />Figma
+        </div>
+        <div class="skill-chip">
+          <img class="icon" src="images/technologies/ps-icon.svg" alt="Photoshop" />Photoshop
+        </div>
+        <div class="skill-chip">
+          <img class="icon" src="images/technologies/jira-icon.svg" alt="Jira" />Jira
+        </div>
+        <div class="skill-chip">
+          <img class="icon" src="images/technologies/google-suit.svg" alt="Google Tools" />Google Tools
+        </div>
+      </div>
+    </div>
+
+    <!-- LINIA 4: Growth, Optimization & AI -->
+    <div class="skills-category-row reveal reveal-delay-4">
+      <h3 class="category-name">Growth, Optimization &amp; AI</h3>
+      <div class="skills-grid">
+        <div class="skill-chip">
+          <img class="icon" src="images/technologies/claude-ai.svg" alt="Claude AI" />Claude AI
+        </div>
+        <div class="skill-chip">
+          <img class="icon" src="images/technologies/chatgpt.svg" alt="ChatGPT" />ChatGPT
+        </div>
+        <div class="skill-chip">
+          <img class="icon" src="images/technologies/screaming-frog.svg" alt="Screaming Frog" />Screaming Frog
+        </div>
+        <div class="skill-chip">
+          <img class="icon" src="images/technologies/asana-icon.svg" alt="Asana" />Asana
+        </div>
+        <div class="skill-chip">
+          <img class="icon" src="images/technologies/zoom-icon.png" alt="Zoom" />Zoom
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
   <!-- CONTACT -->
   <section id="contact" class="contact-section">
