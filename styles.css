@@ -1078,10 +1078,10 @@ section {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 12.5%;
-    width: 75%;
+    left: 25%;
+    width: 50%;
     height: 1px;
-    background: rgba(15, 23, 42, 0.08);
+    background: rgba(15, 23, 42, 0.05);
 }
 
 .skills-grid {
@@ -1848,7 +1848,7 @@ section {
    ========================================================== */
 .contact-section {
     background: var(--cream);
-    padding: 10rem 3.5rem;
+    padding: 8rem 3.5rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -1915,10 +1915,10 @@ section {
     top: 50%;
     transform: translate(-50%, -50%);
     width: min(100%, 1400px);
-    height: 82%;
+    height: 99%;
     pointer-events: none;
     z-index: 0;
-    opacity: .65;
+    opacity: .75;
 }
 
 /* ==========================================================
