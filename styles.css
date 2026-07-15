@@ -1733,7 +1733,7 @@ footer {
 .footer-inner {
   max-width: 1300px;
   margin: 0 auto;
-  padding: 2.5rem 4rem; /* padding boczny 4rem - idealnie zrównany z resztą strony */
+  padding: 2.5rem 2rem; 
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2479,13 +2479,55 @@ footer {
   text-align: center;
 }
 
+/* ==========================================================
+   CAŁKOWICIE ZABEZPIECZONY I NAPRAWIONY SLIDER
+   ========================================================== */
+
 .slider-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden; /* Bezwzględnie ukrywa wystające slajdy */
+  border-radius: 25px;
+  border: 1px solid rgba(51, 51, 51, 0.32);
+  direction: ltr !important; /* Wymusza standardowy kierunek od lewej do prawej, ignorując sekcje "reverse" */
+}
+
+.slider-track {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important; /* Blokuje zawijanie slajdów pod spód */
+  width: 100% !important;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  direction: ltr !important; /* Dodatkowe zabezpieczenie */
+}
+
+.slide {
+  flex: 0 0 100% !important; /* Blokuje jakiekolwiek rozciąganie lub kurczenie */
+  width: 100% !important;      /* Wymusza dokładnie pełną szerokość wrapa */
+  min-width: 100% !important;  /* Zapobiega zwężaniu slajdu przez inne elementy */
+  max-width: 100% !important;
+  aspect-ratio: 16 / 9;        /* Jeśli Twoje grafiki mają inne proporcje, możesz to usunąć lub zmienić */
+  overflow: hidden;
+  background: var(--navy-mid);
+  box-sizing: border-box !important;
+}
+
+/* Wymuszenie na obrazkach w slajdach, by ZAWSZE pokrywały 100% szerokości i wysokości slajdu */
+.slide img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important; /* Wypełnia cały slajd, ucinając ewentualny nadmiar bez zniekształcania */
+  display: block !important;
+}
+/* =====STARY SLIDER ORYGINALNY  */
+/* .slider-wrap {
   position: relative;
   width: 100%;
   overflow: hidden;
   border-radius: 25px;
-  border: 1px solid rgba(51, 51, 51, 0.32); /* Wyraźniejsza krawędź */
-}
+  border: 1px solid rgba(51, 51, 51, 0.32); 
+} 
 
 .slider-track {
   display: flex;
@@ -2495,9 +2537,9 @@ footer {
 }
 
 .slide {
-  flex: 0 0 100%; /* Wymuszenie równego 100% szerokości dla każdego slajdu */
-  width: 100%; /* Usunięcie pustych przestrzeni po bokach */
-  aspect-ratio: 16 / 10;
+  flex: 0 0 100%; 
+  width: 100%; 
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   background: var(--navy-mid);
 }
@@ -2509,6 +2551,8 @@ footer {
   display: block;
 }
 
+*/
+
 /* ── METADANE PROJEKTU I STRUKTURA DOLNA ── */
 .proj-stack {
   background: var(--cream);
@@ -2517,7 +2561,7 @@ footer {
 .proj-stack-inner {
   max-width: 1300px;
   margin: 0 auto;
-  padding: 0rem 4rem;
+  padding: 0rem 2rem;
 }
 .proj-stack-label {
   font-family: "DM Sans", sans-serif;
@@ -2551,6 +2595,7 @@ footer {
   height: 52px;
   box-sizing: border-box;
 }
+
 .stack-chip:hover {
   border-color: var(--blue-bright);
   background: #ffffff;
@@ -2652,7 +2697,6 @@ footer {
 /* Hero */
 .cs-hero {
   background: var(--navy);
-  min-height: 82vh;
   display: flex;
   align-items: center;
   position: relative;
@@ -2678,7 +2722,7 @@ footer {
   width: 100%;
   max-width: 1300px;
   margin: 0 auto;
-  padding: 0 4rem;
+  padding: 0 2rem;
   position: relative;
   z-index: 2;
 }
@@ -2724,7 +2768,7 @@ footer {
 .cs-hero-img-wrap img {
   width: 100%;
   display: block;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
 }
 
@@ -2737,9 +2781,9 @@ footer {
   display: grid;
   grid-template-columns: 1fr 300px;
   gap: 5rem;
-  max-width: 1300px;
+  max-width: 1364px;
   margin: 0 auto 2rem;
-  padding: 5rem 4rem 4rem;
+  padding: 5rem 4rem;
   background: var(--warm-white);
 }
 
@@ -2924,7 +2968,7 @@ footer {
   gap: 1.5rem;
   max-width: 1300px;
   margin: 0 auto 0;
-  padding: 1.5rem;
+  padding: 2.5rem 1.5rem;
   text-decoration: none;
   border-top: 1px solid rgba(15, 23, 42, 0.08);
   transition: opacity 0.2s;
@@ -3028,5 +3072,36 @@ footer {
 
   .cs-next {
     padding: 1.5rem 1.5rem 4rem;
+  }
+}
+
+/* ==========================================================
+   RESPONSIVE STACK CHIPS (Złagodzone dopasowanie mobile)
+   ========================================================== */
+@media (max-width: 900px) {
+  .stack-chip {
+    height: 47px;                  /* Delikatne zmniejszenie z 52px (o połowę mniej niż wcześniej) */
+    padding: 0.75rem 1.35rem;      /* Łagodniejszy padding */
+    font-size: 0.9rem;             /* Czcionka minimalnie mniejsza z 0.95rem na 0.9rem */
+    gap: 0.7rem;
+  }
+
+  .stack-chip img {
+    width: 26px;                   /* Ikona zmniejszona subtelnie z 30px na 26px */
+    height: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stack-chip {
+    height: 44px;                  /* Dopasowanie na mniejsze smartfony */
+    padding: 0.65rem 1.15rem;
+    font-size: 0.85rem;
+    gap: 0.6rem;
+  }
+
+  .stack-chip img {
+    width: 22px;                   /* Ikona 22px na najmniejsze ekrany */
+    height: 22px;
   }
 }

@@ -1,8 +1,3 @@
-/* ══════════════════════════════════════════════════════════════════════════
-   GLOBAL UNIFIED INTERACTIONS (Radek Ruciński - 2026)
-   Works seamlessly across both Homepage (index) and Project pages.
-   ══════════════════════════════════════════════════════════════════════════ */
-
 document.addEventListener('DOMContentLoaded', () => {
 
   // ─── 1. CUSTOM INTERACTIVE CURSOR (Global) ───
@@ -93,35 +88,35 @@ document.addEventListener('DOMContentLoaded', () => {
   function toggleMenu(force) {
     const open = force !== undefined ? force : !menuOpen;
     menuOpen = open;
-    
+
     if (burger) burger.classList.toggle('open', open);
     if (mobileMenu) mobileMenu.classList.toggle('open', open);
     if (burger) burger.setAttribute('aria-expanded', open);
 
     if (open) {
       scrollYBeforeMenu = window.scrollY;
-      
+
       // Blokada scrolla na HTML/BODY
       document.documentElement.classList.add('menu-open');
       document.body.classList.add('menu-open');
-      
+
       // Blokada gestu ciągnięcia na urządzeniach mobilnych
       document.addEventListener('touchmove', preventTouchMove, { passive: false });
       if (mobileMenu) {
         mobileMenu.addEventListener('touchmove', preventTouchMove, { passive: false });
       }
-      
+
       if (nav) nav.classList.remove('hidden');
     } else {
       // Odblokowanie scrolla
       document.documentElement.classList.remove('menu-open');
       document.body.classList.remove('menu-open');
-      
+
       document.removeEventListener('touchmove', preventTouchMove);
       if (mobileMenu) {
         mobileMenu.removeEventListener('touchmove', preventTouchMove);
       }
-      
+
       // Powrót do poprzedniej pozycji scrolla (zapobiega skokom)
       window.scrollTo(0, scrollYBeforeMenu);
     }
@@ -135,8 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
     a.addEventListener('click', () => toggleMenu(false));
   });
 
-  document.addEventListener('keydown', e => { 
-    if (e.key === 'Escape') toggleMenu(false); 
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') toggleMenu(false);
   });
 
   // ─── 4. SMART NAV LOGO COLLAPSE (Global) ───
@@ -144,13 +139,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function handleLogoCollapse() {
     if (!logoCollapsible) return;
-    
+
     const scrollY = window.scrollY;
     const maxScroll = 120; // Dystans zwijania w px
-    
+
     const progress = Math.min(scrollY / maxScroll, 1);
     const inverseProgress = 1 - progress;
-    
+
     logoCollapsible.style.maxWidth = `${inverseProgress * 130}px`;
     logoCollapsible.style.opacity = inverseProgress;
   }
@@ -163,11 +158,11 @@ document.addEventListener('DOMContentLoaded', () => {
     a.addEventListener('click', e => {
       const href = a.getAttribute('href');
       if (href === '#') return;
-      
+
       const target = document.querySelector(href);
-      if (target) { 
-        e.preventDefault(); 
-        target.scrollIntoView({ behavior: 'smooth' }); 
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
       }
     });
   });
@@ -218,9 +213,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (lineRevEls.length > 0) {
     const lineObs = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (e.isIntersecting) { 
-          e.target.classList.add('visible'); 
-          lineObs.unobserve(e.target); 
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          lineObs.unobserve(e.target);
         }
       });
     }, { threshold: 0.08 });
@@ -272,9 +267,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     charHeadings.forEach(el => {
       const strong = el.querySelector('strong');
-      if (strong) { 
-        splitChars(strong); 
-        charObs.observe(el); 
+      if (strong) {
+        splitChars(strong);
+        charObs.observe(el);
       }
     });
   }
@@ -321,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
     vItems[vActive].classList.add('active');
     vSlides[vActive].classList.add('active');
     vPipsWrap.children[vActive].classList.add('active');
-    
+
     const slideH = vRight.clientHeight;
     vTrack.style.transform = `translateY(-${vActive * slideH}px)`;
   }
@@ -565,9 +560,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const pPos = new Float32Array(pCount * 3);
     const pVel = [];
     for (let i = 0; i < pCount; i++) {
-      const u = Math.random() * Math.PI * 2;       
-      const v = Math.random() * Math.PI * 2;       
-      const R = 2.6, r = 0.95 + Math.random() * 0.9; 
+      const u = Math.random() * Math.PI * 2;
+      const v = Math.random() * Math.PI * 2;
+      const R = 2.6, r = 0.95 + Math.random() * 0.9;
       pPos[i * 3] = (R + r * Math.cos(v)) * Math.cos(u);
       pPos[i * 3 + 1] = (R + r * Math.cos(v)) * Math.sin(u);
       pPos[i * 3 + 2] = r * Math.sin(v);
@@ -605,7 +600,7 @@ document.addEventListener('DOMContentLoaded', () => {
       camera.updateProjectionMatrix();
       applyResponsiveScale();
     }).observe(container);
-    applyResponsiveScale(); 
+    applyResponsiveScale();
 
     let vis = false;
     new IntersectionObserver(e => { vis = e[0].isIntersecting; }, { threshold: .05 }).observe(container);
@@ -650,7 +645,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const sliderPrevBtn = document.getElementById('sliderPrev');
   const dotsContainer = document.getElementById('sliderDots');
   const slideCounter = document.getElementById('slideCounter');
-  
+
   if (sliderTrack && slides.length > 0) {
     let currentSlideIndex = 0;
 
@@ -667,10 +662,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const dots = dotsContainer ? Array.from(dotsContainer.children) : [];
 
+    // Przesunięcie procentowe — niezależne od pomiarów offsetWidth,
+    // eliminuje narastający gap przy kolejnych slajdach.
     function updateProjectSlider() {
-      const slideWidth = slides[0].getBoundingClientRect().width;
-      const gap = 24; // 1.5rem gap między slajdami
-      sliderTrack.style.transform = `translateX(-${currentSlideIndex * (slideWidth + gap)}px)`;
+      sliderTrack.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
 
       // Aktualizacja aktywnych kropek
       dots.forEach((dot, idx) => {
@@ -702,8 +697,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Korekta szerokości po zmianie rozmiaru okna
-    window.addEventListener('resize', updateProjectSlider);
+    updateProjectSlider(); // Ustawienie stanu startowego
   }
 
 });
