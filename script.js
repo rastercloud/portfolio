@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })();
 
     // Zbiorcza interakcja powiększania dla elementów z obu podstron
-    const cursorTargets = 'a, button, .portfolio-card, .skill-chip, .slider-btn, .stack-chip, .projlist-item';
+    const cursorTargets = 'a, button, .skill-chip, .slider-btn, .stack-chip, .projlist-item';
     document.addEventListener('mouseover', e => {
       const target = e.target.closest(cursorTargets);
       if (target) {
@@ -289,65 +289,6 @@ document.addEventListener('DOMContentLoaded', () => {
     secNums.forEach(el => secObs.observe(el));
   }
 
-  // ─── 13. VERTICAL SLIDER (Strona Główna) ───
-  const vItems = document.querySelectorAll('.vslider-item');
-  const vSlides = document.querySelectorAll('.vslider-slide');
-  const vTrack = document.getElementById('vsliderTrack');
-  const vRight = document.getElementById('vsliderRight');
-  const vPipsWrap = document.getElementById('vsliderPips');
-  let vActive = 0;
-  let vAuto;
-
-  if (vSlides.length > 0 && vPipsWrap) {
-    vSlides.forEach((_, i) => {
-      const pip = document.createElement('div');
-      pip.className = 'vslider-pip' + (i === 0 ? ' active' : '');
-      pip.addEventListener('click', () => goToVSlide(i));
-      vPipsWrap.appendChild(pip);
-    });
-  }
-
-  function goToVSlide(idx) {
-    if (!vItems.length || !vSlides.length || !vPipsWrap || !vRight || !vTrack) return;
-    vItems[vActive].classList.remove('active');
-    vSlides[vActive].classList.remove('active');
-    vPipsWrap.children[vActive].classList.remove('active');
-    vActive = idx;
-    vItems[vActive].classList.add('active');
-    vSlides[vActive].classList.add('active');
-    vPipsWrap.children[vActive].classList.add('active');
-
-    const slideH = vRight.clientHeight;
-    vTrack.style.transform = `translateY(-${vActive * slideH}px)`;
-  }
-
-  if (vItems.length > 0) {
-    vItems.forEach((item, i) => {
-      item.addEventListener('click', () => {
-        clearInterval(vAuto);
-        goToVSlide(i);
-        startVAuto();
-      });
-    });
-  }
-
-  function startVAuto() {
-    if (!vSlides.length) return;
-    vAuto = setInterval(() => {
-      goToVSlide((vActive + 1) % vSlides.length);
-    }, 4000);
-  }
-
-  if (vSlides.length > 0) {
-    startVAuto();
-    window.addEventListener('resize', () => {
-      if (vRight && vTrack) {
-        const slideH = vRight.clientHeight;
-        vTrack.style.transform = `translateY(-${vActive * slideH}px)`;
-      }
-    });
-  }
-
   // ─── 14. HOVER PROJECT PREVIEW FOLLOW (Strona Główna) ───
   const projItems = document.querySelectorAll('.projlist-item');
   const projPreview = document.getElementById('projPreview');
@@ -426,7 +367,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const particleCount = 320;
     const pPositions = new Float32Array(particleCount * 3);
-    const pSizes = new Float32Array(particleCount);
     const pAngles = new Float32Array(particleCount);
     const pRadii = new Float32Array(particleCount);
     const pSpeeds = new Float32Array(particleCount);
@@ -437,12 +377,10 @@ document.addEventListener('DOMContentLoaded', () => {
       pRadii[i] = 1.6 + Math.random() * 1.4;
       pSpeeds[i] = (0.12 + Math.random() * 0.22) * (Math.random() > 0.5 ? 1 : -1);
       pTilts[i] = (Math.random() - 0.5) * Math.PI;
-      pSizes[i] = Math.random() * 2.8 + 0.8;
     }
 
     const pGeo = new THREE.BufferGeometry();
     pGeo.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
-    pGeo.setAttribute('size', new THREE.BufferAttribute(pSizes, 1));
 
     const pMat = new THREE.PointsMaterial({
       color: 0x93c5fd,
@@ -696,6 +634,48 @@ document.addEventListener('DOMContentLoaded', () => {
         updateProjectSlider();
       });
     }
+
+    // ─── Obsługa przeciągania palcem (swipe) na mobile ───
+    let touchStartX = 0;
+    let touchCurrentX = 0;
+    let isDragging = false;
+
+    sliderTrack.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchCurrentX = touchStartX;
+      isDragging = true;
+      sliderTrack.style.transition = 'none'; // wyłącz animację podczas przeciągania
+    }, { passive: true });
+
+    sliderTrack.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      touchCurrentX = e.touches[0].clientX;
+      const deltaX = touchCurrentX - touchStartX;
+      const deltaPercent = (deltaX / sliderTrack.offsetWidth) * 100;
+      sliderTrack.style.transform = `translateX(calc(-${currentSlideIndex * 100}% + ${deltaPercent}%))`;
+    }, { passive: true });
+
+    function endProjectSliderDrag() {
+      if (!isDragging) return;
+      isDragging = false;
+      sliderTrack.style.transition = ''; // przywróć animację (z CSS)
+
+      const deltaX = touchCurrentX - touchStartX;
+      const threshold = sliderTrack.offsetWidth * 0.15; // próg 15% szerokości
+
+      if (deltaX > threshold && currentSlideIndex > 0) {
+        currentSlideIndex--;
+      } else if (deltaX < -threshold && currentSlideIndex < slides.length - 1) {
+        currentSlideIndex++;
+      }
+
+      touchStartX = 0;
+      touchCurrentX = 0;
+      updateProjectSlider();
+    }
+
+    sliderTrack.addEventListener('touchend', endProjectSliderDrag);
+    sliderTrack.addEventListener('touchcancel', endProjectSliderDrag);
 
     updateProjectSlider(); // Ustawienie stanu startowego
   }

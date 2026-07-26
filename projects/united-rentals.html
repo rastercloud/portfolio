@@ -3,215 +3,178 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hi, I'm Radek - Digital Content Specialist & Low-Code Developer</title>
+  <title>Project - United Rentals</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
-  
 </head>
-<body>
+<body class="case-study">
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
 <nav id="mainNav">
   <div class="nav-inner-container">
-    <a class="nav-logo" href="#">r
-    <span class="logo-collapsible">ucinski</span>
-</a>
+    <a class="nav-logo" href="../index.html">r
+      <span class="logo-collapsible">ucinski</span>
+    </a>
+    <a class="nav-back" href="../index.html#portfolio">
+      <svg viewBox="0 0 14 14" fill="none"><path d="M13 7H1M7 1L1 7l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      All Projects
+    </a>
+  </div>
+</nav>
 
-      <a class="nav-back" href="index.html#portfolio">
-        <svg viewBox="0 0 14 14" fill="none"><path d="M13 7H1M7 1L1 7l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        All Projects
-      </a>
-    </div>
-  </nav>
-
-  <!-- ASYMMETRIC SPLIT HERO -->
-  <section class="proj-hero">
-    <div class="proj-hero-bg"></div>
-    <div class="proj-hero-content">
-      <p class="proj-breadcrumb">Work <span>/</span> <!-- PROJECT NAME --></p>
-      <!-- EDIT: project title -->
-      <h1 class="proj-title">Project<br>Name Here</h1>
-      <!-- EDIT: live URL -->
-      <a href="#" target="_blank" rel="noopener" class="proj-live-link">
+<!-- HERO -->
+<section class="cs-hero">
+  <div class="cs-hero-bg"></div>
+  <div class="cs-hero-inner">
+    <div class="cs-hero-text">
+      <p class="proj-breadcrumb">Work <span>/</span> United Rentals</p>
+      <p class="cs-hero-eyebrow">Multi-Market Site Building &amp; Ongoing Platform Testing</p>
+      <h1 class="cs-hero-title">Building and testing United Rentals' site across US, AU, NZ and EU markets</h1>
+      <p class="cs-hero-sub">An ongoing, multi-month engagement covering page building for the US and AU markets, custom block work in both the legacy editor and Drupal Paragraphs, functionality testing for the new NZ market, and testing of the upcoming multiplatform European site in Mercury Editor.</p>
+      <a href="https://www.unitedrentals.com" target="_blank" rel="noopener" class="proj-live-link">
         Live Website
         <svg viewBox="0 0 12 12" fill="none" style="margin-left: 4px;"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
-    <!-- Right side visual -->
-    <div class="proj-hero-visual">
-      <div class="proj-hero-img-wrap">
-        <!-- EDIT: main screenshot -->
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=85" alt="Main screenshot" />
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECT STACK (Nowe, jasne zoptymalizowane chipy) -->
-  <div class="proj-stack reveal">
-    <div class="proj-stack-inner">
-      <div class="proj-stack-label">Project Stack</div>
-      <div class="proj-stack-grid">
-        <!-- EDIT: add/remove chips as needed -->
-        <div class="stack-chip">
-          <img src="images/technologies/aem-icon.svg" alt="AEM" />
-          Adobe Experience Manager
-        </div>
-        <div class="stack-chip">
-          <img src="images/technologies/html5-icon.svg" alt="HTML5" />
-          HTML5
-        </div>
-        <div class="stack-chip">
-          <img src="images/technologies/css-icon.svg" alt="CSS" />
-          CSS3
-        </div>
-        <div class="stack-chip">
-          <img src="images/technologies/ps-icon.svg" alt="Photoshop" />
-          Photoshop
-        </div>
-        <div class="stack-chip">
-          <img src="images/technologies/google-suit.svg" alt="Google Analytics" />
-          Google Analytics
-        </div>
-        <div class="stack-chip">
-          <img src="images/technologies/jira-icon.svg" alt="Jira" />
-          Jira
-        </div>
+    <div class="cs-hero-visual">
+      <div class="cs-hero-img-wrap">
+        <img src="../images/projects/united-rentals-01.webp" alt="United Rentals website homepage"/>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- GALLERY SLIDER -->
-  <div class="proj-gallery reveal">
-    <div class="proj-gallery-inner">
-      <div class="proj-gallery-label">Project Gallery</div>
-      <div class="slider-wrap">
-        <div class="slider-track" id="sliderTrack">
-          <!-- EDIT: replace src with actual project screenshots -->
-          <div class="slide">
-            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=85" alt="Screenshot 1" loading="lazy"/>
-          </div>
-          <div class="slide">
-            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=85" alt="Screenshot 2" loading="lazy"/>
-          </div>
-          <div class="slide">
-            <img src="https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=1200&q=85" alt="Screenshot 3" loading="lazy"/>
-          </div>
-          <div class="slide">
-            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=85" alt="Screenshot 4" loading="lazy"/>
-          </div>
-        </div>
+<!-- PROJECT STACK -->
+<div class="proj-stack reveal">
+  <div class="proj-stack-inner">
+    <div class="proj-stack-label">Project Stack</div>
+    <div class="proj-stack-grid">
+      <div class="stack-chip">
+        <img src="../images/technologies/drupal-head.svg" alt="Drupal" />
+        Drupal
       </div>
-      <div class="slider-nav">
-        <button class="slider-btn" id="sliderPrev" aria-label="Previous">
-          <svg viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <div class="slider-dots" id="sliderDots"></div>
-        <button class="slider-btn" id="sliderNext" aria-label="Next">
-          <svg viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <span class="slide-counter" id="slideCounter">1 / 4</span>
+      <div class="stack-chip">
+        <img src="../images/technologies/paragraphs-icon.svg" alt="Drupal Paragraphs" />
+        Drupal Paragraphs
+      </div>
+      <div class="stack-chip">
+        <img src="../images/technologies/mercury-editor-icon.svg" alt="Mercury Editor" />
+        Mercury Editor
+      </div>
+      <div class="stack-chip">
+        <img src="../images/technologies/ps-icon.svg" alt="Photoshop" />
+        Photoshop
+      </div>
+      <div class="stack-chip">
+        <img src="../images/technologies/jira-icon.svg" alt="Jira" />
+        Jira
       </div>
     </div>
   </div>
+</div>
 
-  <!-- ASYMMETRIC CONTENT & SIDEBAR GRID -->
-  <div class="proj-meta-grid">
-    <!-- LEFT: description -->
-    <div class="reveal">
-      <!-- EDIT: project title and description -->
-      <h2 class="proj-content-title">Project Name &ndash; Full Project Title Goes Here</h2>
+<!-- MAIN CONTENT -->
+<div class="cs-body">
+  <div class="cs-main-grid">
 
-      <p class="proj-body">
-        This project focused on <!-- EDIT: brief overview paragraph -->.
-        The primary objective was to <!-- EDIT: goal -->.
-      </p>
+    <div class="cs-content">
 
-      <div class="proj-section-title">Key Responsibilities</div>
-      <ul class="proj-list">
-        <!-- EDIT: replace with actual responsibilities -->
-        <li>Implementation of AEM components and templates to ensure visual and structural consistency across all product pages.</li>
-        <li>Content migration and restructuring across multiple regional markets, adapting to local requirements.</li>
-        <li>SEO optimisation including meta titles, descriptions, headings, and keyword usage to improve organic visibility.</li>
-        <li>Digital asset editing and optimisation ensuring high-quality visuals that display correctly on all devices.</li>
-        <li>Metadata and tagging configuration to enhance content discoverability and governance.</li>
-        <li>Collaboration with developers, designers, and marketing teams to align content with campaign goals.</li>
-      </ul>
+      <section class="cs-section reveal">
+        <h2 class="cs-section-label">Context</h2>
+        <p class="cs-lead">United Rentals' site is large and constantly evolving, spanning multiple markets and page-building systems.</p>
+        <p class="proj-body">This has been a several-month engagement that's still ongoing. The core of the work has involved building out pages for the US and Australian markets, modifying existing pages in both the legacy page editor and Drupal Paragraphs, and creating and adjusting custom blocks used across the site. Alongside that, a separate workstream focused on testing functionality for the new New Zealand market as it was rolled out.</p>
+      </section>
 
-      <p class="proj-body" style="margin-top: 2rem;">
-        <!-- EDIT: closing paragraph / outcome summary -->
-        By leveraging the platform's full capabilities, this project successfully delivered a scalable and efficient solution — ensuring both content integrity and a smooth experience for users.
-      </p>
-    </div>
-
-    <!-- RIGHT: metadata sidebar -->
-    <div class="reveal reveal-delay-1">
-      <div class="proj-meta-sidebar">
-        <div class="proj-meta-card">
-          <div class="proj-meta-card-label">Project Details</div>
-          <div class="proj-meta-row" style="gap:1.4rem">
-            <div>
-              <div class="proj-meta-item-label">Client</div>
-              <!-- EDIT -->
-              <div class="proj-meta-item-value">Client Name</div>
-            </div>
-            <div>
-              <div class="proj-meta-item-label">Year</div>
-              <!-- EDIT -->
-              <div class="proj-meta-item-value">2024</div>
-            </div>
-            <div>
-              <div class="proj-meta-item-label">My Role</div>
-              <!-- EDIT -->
-              <div class="proj-meta-item-value">Content Editor</div>
-            </div>
-            <div>
-              <div class="proj-meta-item-label">Duration</div>
-              <!-- EDIT -->
-              <div class="proj-meta-item-value">6 months</div>
+      <section class="cs-section reveal">
+        <h2 class="cs-section-label">Gallery</h2>
+        <div class="cs-gallery">
+          <div class="slider-wrap">
+            <div class="slider-track" id="sliderTrack">
+              <div class="slide">
+                <img src="../images/projects/united-rentals-01.webp" alt="United Rentals website" loading="lazy"/>
+              </div>
+              <div class="slide">
+                <img src="../images/projects/united-rentals-02.webp" alt="United Rentals website" loading="lazy"/>
+              </div>
+              <div class="slide">
+                <img src="../images/projects/united-rentals-03.webp" alt="United Rentals website" loading="lazy"/>
+              </div>
+              <div class="slide">
+                <img src="../images/projects/united-rentals-04.webp" alt="United Rentals website" loading="lazy"/>
+              </div>
             </div>
           </div>
+          <div class="slider-nav cs-slider-nav">
+            <button class="slider-btn cs-slider-btn" id="sliderPrev" aria-label="Previous">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="slider-dots" id="sliderDots"></div>
+            <button class="slider-btn cs-slider-btn" id="sliderNext" aria-label="Next">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <span class="slide-counter cs-slide-counter" id="slideCounter">1 / 4</span>
+          </div>
         </div>
+      </section>
 
-        <div class="proj-meta-card" style="padding: 1.5rem;">
-          <!-- EDIT: URL -->
-          <a href="#" target="_blank" rel="noopener" class="proj-live-link-sidebar">
-            Visit live website
-            <svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-      </div>
+      <section class="cs-section reveal">
+        <h2 class="cs-section-label">Outcome</h2>
+        <p class="proj-body">The work is currently focused on testing the upcoming multiplatform website for European markets, built in Mercury Editor — the next phase in an engagement that has continuously expanded in scope across new regions and editing systems.</p>
+        <ul class="proj-list proj-list--tight">
+          <li>Built and modified pages for the US and Australian markets across two different editing systems</li>
+          <li>Created and adjusted custom blocks used across the site</li>
+          <li>Tested new market functionality for the New Zealand rollout</li>
+          <li>Currently testing the new multiplatform European site in Mercury Editor</li>
+        </ul>
+      </section>
+
     </div>
+
+    <aside class="cs-sidebar reveal reveal-delay-1">
+      <div class="cs-sidebar-card">
+        <h3 class="cs-sidebar-title">My contribution</h3>
+        <ul class="cs-sidebar-list">
+          <li>Page building for the US and AU markets</li>
+          <li>Page modification in both the legacy editor and Drupal Paragraphs</li>
+          <li>Custom block creation and modification</li>
+          <li>Functionality testing for the new NZ market</li>
+          <li>Ongoing testing of the new multiplatform EU site in Mercury Editor</li>
+        </ul>
+      </div>
+    </aside>
+
   </div>
+</div>
 
-  <!-- NEXT PROJECT -->
-  <a href="project-template.html" class="proj-next">
-    <div class="proj-next-overlay"></div>
-    <div class="proj-next-bg">
-      <!-- EDIT: next project thumbnail -->
-      <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1400&q=75" alt="Next project"/>
-    </div>
-    <div class="proj-next-content">
-      <p class="proj-next-label">Next Project</p>
-      <!-- EDIT: next project name -->
-      <div class="proj-next-title">Next Project Name</div>
-      <div class="proj-next-arrow">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16h20M18 8l8 8-8 8"/></svg>
-      </div>
-    </div>
-  </a>
+<!-- NEXT PROJECT -->
+<a href="sanex.html" class="cs-next reveal">
+  <div class="cs-next-thumb">
+    <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=75" alt="Sanex project thumbnail"/>
+  </div>
+  <div class="cs-next-info">
+    <p class="cs-next-label">Next project</p>
+    <p class="cs-next-title">Sanex</p>
+    <p class="cs-next-desc">Global personal care brand — AEM content management</p>
+  </div>
+  <div class="cs-next-arrow">
+    <svg width="24" height="24" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16h20M18 8l8 8-8 8"/></svg>
+  </div>
+</a>
 
-  <footer>
+<footer>
+  <div class="footer-inner">
     <span class="footer-name">rucinski.dev</span>
     <span class="footer-copy">&copy; 2026 &mdash; All rights reserved</span>
     <div class="footer-links">
       <a href="mailto:hello@rucinski.tech">Email</a>
       <a href="https://www.linkedin.com/in/radoslaw-rucinski/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
-  </footer>
-  <script src="../script.js"></script>
+  </div>
+</footer>
+<script src="../script.js"></script>
 </body>
 </html>
