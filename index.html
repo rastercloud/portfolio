@@ -46,12 +46,7 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-video-wrap">
-      <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&q=80">
-        <source src="https://cdn.pixabay.com/video/2018/12/09/19847-306108534_large.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="hero-bg-grid"></div>
+    <div id="shader-bg"></div>
     <div class="hero-content">
       <p class="hero-greeting"><span class="hero-wave">&#x1F44B;</span>&nbsp;Hi, I&rsquo;m Radek</p>
       <h1 class="hero-title">
@@ -103,8 +98,7 @@
       <div class="profile-photo-wrap reveal-right">
         <div class="profile-3d-canvas" id="profileCanvas"></div>
 
-        <!-- orbiting platform icons, overlaid directly on the shape —
-             swap these src values for real SVGs whenever ready -->
+  
         <div class="badge-orbit">
           <div class="badge-orbit-spin">
             <span class="badge-orbit-icon badge-orbit-icon-1" title="Adobe Experience Manger">
@@ -380,10 +374,9 @@
     </div>
   </section>
 
-  <!-- VIDEO STRIP -->
   <div class="video-strip">
     <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1600&q=75">
-      <source src="https://videos.pexels.com/video-files/3326457/3326457-uhd_2560_1440_25fps.mp4" type="video/mp4">
+        <source src="https://cdn.pixabay.com/video/2018/12/09/19847-306108534_large.mp4" type="video/mp4">
     </video>
     <div class="video-strip-overlay"></div>
     <div class="video-strip-content">
@@ -504,7 +497,9 @@
 </footer>
 
   <!-- Three.js CDN (required for 3D scenes in script.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="script.js"></script>
+  <script src="sketch.js"></script>
 </body>
 </html>
