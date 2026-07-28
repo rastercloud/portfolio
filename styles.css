@@ -1386,8 +1386,8 @@ section {
 
 .projlist-preview {
   position: fixed;
-  width: 400px;
-  height: 195px;
+  width: clamp(320px, 42vw, 600px);
+  height: clamp(200px, 26.25vw, 375px);
   pointer-events: none;
   z-index: 500;
   border-radius: 4px;
