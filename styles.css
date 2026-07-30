@@ -1386,8 +1386,8 @@ section {
 
 .projlist-preview {
   position: fixed;
-  width: clamp(320px, 42vw, 600px);
-  height: clamp(200px, 26.25vw, 375px);
+  width: clamp(320px, 35vw, 600px);
+  height: clamp(200px, 21.875vw, 375px);
   pointer-events: none;
   z-index: 500;
   border-radius: 4px;
@@ -1821,16 +1821,16 @@ footer {
   transition-delay: 0.1s;
 }
 .reveal-delay-2 {
-  transition-delay: 0.2s;
+  transition-delay: 0.12s;
 }
 .reveal-delay-3 {
-  transition-delay: 0.3s;
+  transition-delay: 0.14s;
 }
 .reveal-delay-4 {
-  transition-delay: 0.4s;
+  transition-delay: 0.16s;
 }
 .reveal-delay-5 {
-  transition-delay: 0.5s;
+  transition-delay: 0.18s;
 }
 
 .reveal-clip {
