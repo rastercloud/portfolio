@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
     doParallax();
   }
 
-  // ─── 11. CHAR SPLIT ANIMATION (Typografia - Strona Główna) ───
+
   function splitChars(el) {
     const text = el.textContent.trim();
     const wordsArray = text.split(/\s+/);
@@ -427,6 +427,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     resizeObserver.observe(container);
 
+    // Prekompilacja shaderów w tle (poza momentem wejścia w viewport),
+    // żeby uniknąć kosztownej, synchronicznej kompilacji programów WebGL
+    // dokładnie w chwili, gdy sekcja staje się widoczna podczas scrolla.
+    const warmUpSphere = () => renderer.compile(scene, camera);
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(warmUpSphere, { timeout: 2000 });
+    } else {
+      setTimeout(warmUpSphere, 300);
+    }
+
     let visible = false;
     const ioObs = new IntersectionObserver(entries => {
       visible = entries[0].isIntersecting;
@@ -508,13 +518,13 @@ document.addEventListener('DOMContentLoaded', () => {
     torusGroup.add(torusMesh, torusEdge);
     scene.add(torusGroup);
 
-    const outerGeo = new THREE.TorusGeometry(2.9, 1.05, 16, 80);
+    const outerGeo = new THREE.TorusGeometry(2.9, 1.05, 8, 40);
     const outerMesh = new THREE.Mesh(outerGeo, new THREE.MeshBasicMaterial({
       color: 0x3b82f6, wireframe: true, transparent: true, opacity: 0.05
     }));
     scene.add(outerMesh);
 
-    const pCount = 220;
+    const pCount = 110;
     const pPos = new Float32Array(pCount * 3);
     const pVel = [];
     for (let i = 0; i < pCount; i++) {
@@ -559,6 +569,17 @@ document.addEventListener('DOMContentLoaded', () => {
       applyResponsiveScale();
     }).observe(container);
     applyResponsiveScale();
+
+    // Prekompilacja shaderów w tle — bez tego pierwsze renderer.render()
+    // (wywoływane dopiero gdy sekcja Contact wjeżdża w viewport) blokuje
+    // wątek główny na czas linkowania programów WebGL, co objawia się
+    // jako zacinający się scroll dokładnie w tym miejscu strony.
+    const warmUpTorus = () => renderer.compile(scene, camera);
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(warmUpTorus, { timeout: 2000 });
+    } else {
+      setTimeout(warmUpTorus, 300);
+    }
 
     let vis = false;
     new IntersectionObserver(e => { vis = e[0].isIntersecting; }, { threshold: .05 }).observe(container);
