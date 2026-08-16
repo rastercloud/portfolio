@@ -326,6 +326,22 @@ function setup() {
     noStroke();
 
     fluidShader = createShader(vert, frag);
+
+    // Shader hero jest kosztowny (fbm x5 oktaw, podwójny warp) i renderuje
+    // się co klatkę. Bez pauzy działa non-stop nawet gdy hero jest dawno
+    // poza viewportem, obciążając GPU/wątek główny podczas całego scrolla
+    // i powodując zacinanie przy innych ciężkich sekcjach (np. Three.js).
+    // Zatrzymujemy pętlę draw(), gdy sekcja nie jest widoczna.
+    new IntersectionObserver(
+        (entries) => {
+            if (entries[0].isIntersecting) {
+                loop();
+            } else {
+                noLoop();
+            }
+        },
+        { threshold: 0 },
+    ).observe(container);
 }
 
 function draw() {

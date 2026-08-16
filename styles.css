@@ -818,7 +818,7 @@ section {
 
 .parallax-inner {
   position: absolute;
-  inset: -15%;
+  inset: -8%;
   will-change: transform;
 }
 
@@ -1095,28 +1095,7 @@ section {
   justify-content: center;
   margin: -3.5rem 0;
   z-index: 5;
-  clip-path: polygon(
-    0% 6%,
-    8% 3.5%,
-    18% 5.5%,
-    30% 2.5%,
-    42% 5%,
-    55% 2%,
-    68% 4.5%,
-    80% 1.5%,
-    92% 4%,
-    100% 2%,
-    100% 94%,
-    92% 96.5%,
-    80% 94.5%,
-    68% 97.5%,
-    55% 95%,
-    42% 98%,
-    30% 95.5%,
-    18% 98.5%,
-    8% 96.5%,
-    0% 99%
-  );
+  clip-path: polygon(0% 4%, 100% 0%, 100% 100%, 0% 96%);
 }
 
 .video-strip video {
@@ -1150,6 +1129,21 @@ section {
   font-size: clamp(2.5rem, 6vw, 5rem);
   letter-spacing: 0.04em;
   line-height: 1;
+}
+
+.strip-heading .word {
+  display: inline-block;
+  transition:
+    color 0.35s ease,
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    text-shadow 0.35s ease;
+  cursor: default;
+}
+
+.strip-heading .word:hover {
+  color: var(--blue-bright);
+  transform: translateY(-0.08em);
+  text-shadow: 0 0 24px rgba(59, 130, 246, 0.55);
 }
 
 .video-strip-content p {
@@ -1259,7 +1253,7 @@ section {
 
 .projlist-item {
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  padding: 1.6rem 0;
+  padding: 1.6rem 1.2rem 1.6rem 0;
   display: flex;
   align-items: center;
   gap: 1.4rem;
@@ -1339,6 +1333,16 @@ section {
 
 .projlist-item:hover .projlist-tag {
   color: var(--blue-bright);
+}
+
+.projlist-tag--archived {
+  color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.projlist-item:hover .projlist-tag--archived {
+  color: #a1a1aa;
 }
 
 .projlist-icon {
@@ -1999,20 +2003,7 @@ footer {
     height: 320px;
     margin: -2rem 0;
     z-index: 5;
-    clip-path: polygon(
-      0% 4%,
-      20% 2%,
-      40% 3.5%,
-      60% 1.5%,
-      80% 3%,
-      100% 1.5%,
-      100% 96.5%,
-      80% 98.5%,
-      60% 97%,
-      40% 99%,
-      20% 97.5%,
-      0% 99%
-    );
+    clip-path: polygon(0% 3%, 100% 0%, 100% 100%, 0% 97%);
   }
 
   .projlist-section {
@@ -2647,7 +2638,7 @@ footer {
 }
 
 /* ==========================================================================
-   CASE STUDY — product-style layout (Żywiec Zdrój v2)
+   CASE STUDY — product-style layout 
    ========================================================================== */
 
 .case-study {
@@ -2729,6 +2720,28 @@ footer {
   width: 100%;
   display: block;
   object-fit: cover;
+}
+
+.proj-archived-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #a1a1aa;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-top: 12px;
+  width: fit-content;
+}
+
+.cs-gallery-note {
+  font-size: 0.8rem;
+  color: rgba(15, 23, 42, 0.45);
+  font-style: italic;
+  margin-top: 0.75rem;
 }
 
 /* Main body */
