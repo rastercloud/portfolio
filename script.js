@@ -330,11 +330,35 @@ document.addEventListener('DOMContentLoaded', () => {
       targetY = Math.min(Math.max(e.clientY - 100, 20), window.innerHeight - previewHeight - 20);
     });
 
+    // Preload wszystkich obrazków preview od razu po załadowaniu strony,
+    // żeby hover nigdy nie czekał na sieć (produkcja) — obrazek trafia
+    // do cache pamięci przeglądarki zanim user w ogóle najedzie kursorem.
+    projItems.forEach(item => {
+      const preloadSrc = item.dataset.img;
+      if (preloadSrc) {
+        const preloadImg = new Image();
+        preloadImg.src = preloadSrc;
+      }
+    });
+
     projItems.forEach(item => {
       const imgSrc = item.dataset.img;
       item.addEventListener('mouseenter', () => {
-        if (projPreviewImg) {
+        if (!projPreviewImg || !imgSrc) return;
+
+        if (projPreviewImg.src !== imgSrc) {
+          // Zmiana projektu — chowamy podgląd, dopóki nowy obrazek nie jest gotowy,
+          // żeby nie mignął stary kadr pod nowym opisem.
+          projPreview.classList.remove('visible');
+          projPreviewImg.decoding = 'async';
+          projPreviewImg.onload = () => projPreview.classList.add('visible');
           projPreviewImg.src = imgSrc;
+
+          if (projPreviewImg.complete) {
+            // Obrazek już w cache (dzięki preloadowi powyżej) — pokaż od razu.
+            projPreview.classList.add('visible');
+          }
+        } else {
           projPreview.classList.add('visible');
         }
       });
@@ -625,7 +649,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const dotsContainer = document.getElementById('sliderDots');
   const slideCounter = document.getElementById('slideCounter');
 
-  if (sliderTrack && slides.length > 0) {
+  // Jeśli slajd jest tylko jeden — chowamy całą nawigację slidera (strzałki, kropki, licznik)
+  const sliderNavWrap = document.querySelector('.cs-slider-nav');
+  if (slides.length <= 1 && sliderNavWrap) {
+    sliderNavWrap.style.display = 'none';
+  }
+
+  if (sliderTrack && slides.length > 1) {
     let currentSlideIndex = 0;
 
     // Tworzenie kropek nawigacyjnych
