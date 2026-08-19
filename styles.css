@@ -141,10 +141,10 @@ nav.hidden {
 
 .nav-logo {
   font-family: "DM Sans", sans-serif !important;
-  font-weight: 800 !important;
-  font-size: 1.5rem !important;
-  letter-spacing: 0.05em !important;
-  color: #fff;
+  font-size: 0.75rem !important;
+  text-transform: capitalize;
+  letter-spacing: 0.16em !important;
+  color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
   z-index: 201;
   position: relative;
@@ -1741,7 +1741,7 @@ footer {
 
 .footer-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .footer-links a {
