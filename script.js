@@ -130,6 +130,17 @@ document.addEventListener('DOMContentLoaded', () => {
     a.addEventListener('click', () => toggleMenu(false));
   });
 
+  const navLogo = document.querySelector('.nav-logo');
+  if (navLogo) {
+    navLogo.addEventListener('click', (e) => {
+      if (menuOpen) {
+        e.preventDefault();
+        toggleMenu(false);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
+
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') toggleMenu(false);
   });

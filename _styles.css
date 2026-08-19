@@ -758,8 +758,8 @@ section {
 .section-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 700px;
-  /* align-items: stretch; */
+  min-height: 780px;
+  align-items: stretch;
   margin: 0;
 }
 
@@ -774,7 +774,7 @@ section {
 .split-media {
   position: relative;
   overflow: hidden;
-  min-height: 560px;
+  min-height: 780px;
 }
 
 .split-media-overlay {
