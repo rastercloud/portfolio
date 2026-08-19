@@ -377,6 +377,28 @@ document.addEventListener('DOMContentLoaded', () => {
         projPreview.classList.remove('visible');
       });
     });
+
+    // Szybki scroll (np. kółkiem myszy) potrafi przewinąć sekcję projektów
+    // pod kursorem bez wywołania mouseleave na .projlist-item — podgląd
+    // zostawałby wtedy "przyklejony" na ekranie i zasłaniał kolejne sekcje.
+    // Chowamy go natychmiast przy każdym scrollu.
+    window.addEventListener('scroll', () => {
+      projPreview.classList.remove('visible');
+    }, { passive: true });
+
+    // Dodatkowe zabezpieczenie: jeśli sama sekcja portfolio wyjdzie
+    // poza viewport, podgląd na pewno nie powinien być widoczny.
+    const projSection = document.getElementById('portfolio');
+    if (projSection) {
+      const projSectionObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) {
+            projPreview.classList.remove('visible');
+          }
+        });
+      }, { threshold: 0 });
+      projSectionObs.observe(projSection);
+    }
   }
 
   // ─── 15. THREE.JS WIREFRAME SPHERE (Strona Główna - O nas) ───
